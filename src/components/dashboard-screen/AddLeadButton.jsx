@@ -9,7 +9,7 @@ export default function AddLeadButton({ className = "" }) {
       className={`btn btn-primary ${className}`}
       onClick={() => navigate("/add-lead")}
     >
-      + Add New Lead Source
+      + Add New Lead
     </button>
   );
 }
