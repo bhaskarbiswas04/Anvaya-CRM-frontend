@@ -35,7 +35,7 @@ export default function App() {
       <Route path="/sales" element={<Sales />} />
       <Route path="/agents" element={<Agents />} />
       <Route path="/reports" element={<Reports />} />
-      <Route path="/settings" element={<Settings Management />} /> */}
+      <Route path="/settings" element={<Settings />} /> */}
     </Routes>
   );
 }
