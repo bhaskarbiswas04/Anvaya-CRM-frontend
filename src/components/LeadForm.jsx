@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { useLeads } from "../context/LeadContext";
 import { useNavigate } from "react-router-dom";
+import BackButton from "./BackButton";
 
 export default function LeadForm() {
   const { addLead, leads } = useLeads();
@@ -160,8 +161,12 @@ export default function LeadForm() {
           </div>
 
           {/* Submit */}
-          <div className="col-12 text-end">
-            <button className="btn btn-primary">Create Lead</button>
+          <div className="mt-3 d-flex justify-content-center">
+            <button className="btn btn-primary me-3">
+              Create Lead
+            </button>
+
+            <BackButton navigationPath="/" />
           </div>
         </form>
       </div>

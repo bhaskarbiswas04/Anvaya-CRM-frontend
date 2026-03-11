@@ -2,6 +2,7 @@ import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import Sidebar from "../layouts/Sidebar";
 import { useAgents } from "../context/AgentContext";
+import BackButton from "../components/backButton";
 
 export default function AddAgentPage() {
   const { addAgent } = useAgents();
@@ -65,9 +66,11 @@ export default function AddAgentPage() {
           </div>
 
           <div className="mt-3 d-flex justify-content-center">
-            <button className="btn btn-primary" onClick={submit}>
+            <button className="btn btn-primary me-3" onClick={submit}>
               Create Agent
             </button>
+
+            <BackButton navigationPath="/agents" />
           </div>
         </div>
       </main>

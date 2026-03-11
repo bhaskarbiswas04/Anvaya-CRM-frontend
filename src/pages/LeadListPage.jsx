@@ -64,7 +64,7 @@ export default function LeadList() {
       <Sidebar />
 
       <main className="flex-grow-1 p-4 bg-light container-fluid">
-        <h3 className="mb-4">Lead List</h3>
+        <h3 className="mb-4 text-center">Lead List</h3>
 
         {/* FILTER BAR */}
         <div className="row g-2 mb-3">

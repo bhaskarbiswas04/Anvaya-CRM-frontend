@@ -25,10 +25,14 @@ export default function DashboardPage() {
       <main className="flex-grow-1 p-4 bg-light">
         <h2 className="text-center my-3">CRM Dashboard</h2>
 
-        <LeadPreview leads={filteredLeads} />
         <LeadStats leads={leads} />
-        <QuickFilters setFilter={setFilter} />
-        <AddLeadButton />
+
+        <div className="d-flex justify-content-between align-items-center">
+          <QuickFilters setFilter={setFilter} />
+          <AddLeadButton />
+        </div>
+
+        <LeadPreview leads={filteredLeads} />
       </main>
     </div>
   );

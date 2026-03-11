@@ -1,12 +1,12 @@
-import { useParams, useNavigate } from "react-router-dom";
+import { useParams } from "react-router-dom";
 import { useLeads } from "../context/LeadContext";
 import Sidebar from "../layouts/Sidebar";
 import { useState } from "react";
 import EditLeadModal from "../components/EditLeadModal";
+import BackButton from "../components/BackButton";
 
 export default function LeadDetails() {
   const { id } = useParams();
-  const navigate = useNavigate();
   const { leads, addComment, updateLead } = useLeads();
 
   const [open, setOpen] = useState(false);
@@ -43,12 +43,7 @@ export default function LeadDetails() {
 
       <main className="flex-grow-1 p-4 bg-light container-fluid">
         {/* Back button */}
-        <button
-          className="btn btn-secondary mb-3"
-          onClick={() => navigate("/")}
-        >
-          ← Back
-        </button>
+        <BackButton navigationPath="/leads" className="mb-3"/>
 
         {/* Header */}
         <div className="d-flex justify-content-between align-items-center mb-3">
