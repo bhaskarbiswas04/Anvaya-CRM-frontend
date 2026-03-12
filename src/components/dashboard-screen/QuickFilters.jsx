@@ -1,35 +1,41 @@
-export default function QuickFilters({ setFilter }) {
+export default function QuickFilters({ filter, setFilter }) {
+  const getClass = (value) =>
+    `btn me-2 ${filter === value ? "btn-primary" : "btn-outline-primary"}`;
+
+  const getSuccessClass = (value) =>
+    `btn ms-2 ${filter === value ? "btn-success" : "btn-outline-success"}`;
+
   return (
     <div className="mb-4">
-      <button
-        className="btn btn-outline-primary me-2"
-        onClick={() => setFilter("New")}
-      >
+      <button className={getClass("New")} onClick={() => setFilter("New")}>
         New
       </button>
+
       <button
-        className="btn btn-outline-primary"
+        className={getClass("Contacted")}
         onClick={() => setFilter("Contacted")}
       >
         Contacted
       </button>
 
       <button
-        className="btn btn-outline-success ms-2"
+        className={getSuccessClass("Qualified")}
         onClick={() => setFilter("Qualified")}
       >
         Qualified
       </button>
 
       <button
-        className="btn btn-outline-success ms-2"
+        className={getSuccessClass("Proposal Sent")}
         onClick={() => setFilter("Proposal Sent")}
       >
         Proposal Sent
       </button>
 
       <button
-        className="btn btn-outline-secondary ms-2"
+        className={`btn ms-2 ${
+          filter === "" ? "btn-secondary" : "btn-outline-secondary"
+        }`}
         onClick={() => setFilter("")}
       >
         All

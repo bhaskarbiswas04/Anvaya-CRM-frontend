@@ -1,12 +1,6 @@
 import { Routes, Route } from "react-router-dom";
 import DashboardPage from "./pages/DashboardPage"
-// import Leads from "./pages/Leads";
-// import Sales from "./pages/Sales";
-// import Agents from "./pages/Agents";
-// import Reports from "./pages/Reports";
-// import Settings from "./pages/Settings";
-
-import LeadDetails from "./pages/LeadDetails";
+import LeadDetailsPage from "./pages/LeadDetails";
 import LeadListPage from "./pages/LeadListPage";
 import AddLeadsPage from "./pages/AddLeadsPage";
 import SalesAgentsPage from "./pages/SalesAgentsPage";
@@ -20,7 +14,7 @@ export default function App() {
   return (
     <Routes>
       <Route path="/" element={<DashboardPage />} />
-      <Route path="/leads/:id" element={<LeadDetails />} />
+      <Route path="/leads/:id" element={<LeadDetailsPage />} />
       <Route path="/leads" element={<LeadListPage />} />
       <Route path="/add-lead" element={<AddLeadsPage />} />
 

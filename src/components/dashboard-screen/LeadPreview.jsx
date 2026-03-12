@@ -30,7 +30,8 @@ export default function LeadPreview({ leads }) {
 
 
   return (
-    <div className="row mb-4">
+    <div className="row my-4">
+      <h4 className="text-success">Recent Leads</h4>
       {visibleLeads.map((lead) => (
         <div key={lead._id || lead.id} className="col-12 col-md-3 mt-2">
           <div

@@ -8,8 +8,7 @@ import QuickFilters from "../components/dashboard-screen/QuickFilters";
 import AddLeadButton from "../components/dashboard-screen/AddLeadButton";
 
 export default function DashboardPage() {
-  const { leads, loading } = useLeads(); // get loading also
-  console.log(leads);
+  const { leads, loading } = useLeads();
 
   const [filter, setFilter] = useState("");
 
@@ -17,8 +16,11 @@ export default function DashboardPage() {
     return (
       <div className="d-flex vh-100">
         <Sidebar />
-        <main className="flex-grow-1 p-4">
-          <h3>Loading Leads...</h3>
+
+        <main className="flex-grow-1 p-4 bg-light">
+          <div className="mx-auto" style={{ maxWidth: "1200px" }}>
+            <h3>Loading Leads...</h3>
+          </div>
         </main>
       </div>
     );
@@ -33,16 +35,22 @@ export default function DashboardPage() {
       <Sidebar />
 
       <main className="flex-grow-1 p-4 bg-light">
-        <h2 className="text-center my-3">CRM Dashboard</h2>
+        {/* Fixed width container */}
+        <div className="mx-auto" style={{ maxWidth: "1200px" }}>
+          <h2 className="text-center my-3">CRM Dashboard</h2>
 
-        <LeadStats leads={leads} />
+          {/* Lead Stats */}
+          <LeadStats leads={leads} />
 
-        <div className="d-flex justify-content-between align-items-center">
-          <QuickFilters setFilter={setFilter} />
-          <AddLeadButton />
+          {/* Filters + Button */}
+          <div className="d-flex justify-content-between align-items-center mb-3">
+            <QuickFilters filter={filter} setFilter={setFilter} />
+            <AddLeadButton />
+          </div>
+
+          {/* Recent Leads */}
+          <LeadPreview leads={filteredLeads} />
         </div>
-
-        <LeadPreview leads={filteredLeads} />
       </main>
     </div>
   );
