@@ -1,8 +1,8 @@
 export default function LeadStats({ leads }) {
   const stats = {
-    new: leads.filter((l) => l.status === "new").length,
-    contacted: leads.filter((l) => l.status === "contacted").length,
-    qualified: leads.filter((l) => l.status === "qualified").length,
+    new: leads.filter((l) => l.status === "New").length,
+    contacted: leads.filter((l) => l.status === "Contacted").length,
+    qualified: leads.filter((l) => l.status === "Qualified").length,
     proposalSent: leads.filter((l) => l.status === "Proposal Sent").length,
     closed: leads.filter((l) => l.status === "Closed").length,
   };

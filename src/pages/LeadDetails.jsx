@@ -1,33 +1,70 @@
 import { useParams } from "react-router-dom";
 import { useLeads } from "../context/LeadContext";
 import Sidebar from "../layouts/Sidebar";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import EditLeadModal from "../components/EditLeadModal";
 import BackButton from "../components/BackButton";
 
 export default function LeadDetails() {
   const { id } = useParams();
-  const { leads, addComment, updateLead } = useLeads();
+
+  const { leads, addComment, updateLead, getLeadById } = useLeads();
+
+  const [lead, setLead] = useState(null);
+  const [loading, setLoading] = useState(true);
 
   const [open, setOpen] = useState(false);
   const [comment, setComment] = useState("");
   const [author, setAuthor] = useState("");
 
-  const lead = leads?.find((lead) => lead.id === parseInt(id));
-  const agents = [...new Set(leads.map((l) => l.agent))];
+  useEffect(() => {
+    const loadLead = async () => {
+      try {
+        const data = await getLeadById(id);
+        console.log(data);
+        
+        setLead(data);
+      } catch (err) {
+        console.error("Failed to load lead", err);
+      } finally {
+        setLoading(false);
+      }
+    };
 
-  if (!lead) {
+    if (id) loadLead();
+  }, [id, getLeadById]);
+
+  // Generate agents list safely
+  const agents = [
+    ...new Set(leads?.map((l) => l.salesAgent?.name).filter(Boolean)),
+  ];
+
+  if (loading) {
     return (
-      <div className="p-4">
-        <h3>Lead not found</h3>
+      <div className="d-flex vh-100">
+        <Sidebar />
+        <main className="flex-grow-1 p-4">
+          <h4>Loading lead details...</h4>
+        </main>
       </div>
     );
   }
 
-  const submit = () => {
+  if (!lead) {
+    return (
+      <div className="d-flex vh-100">
+        <Sidebar />
+        <main className="flex-grow-1 p-4">
+          <h4>Lead not found</h4>
+        </main>
+      </div>
+    );
+  }
+
+  const submit = async () => {
     if (!comment.trim() || !author) return;
 
-    addComment(lead.id, {
+    await addComment(lead.id, {
       text: comment,
       author,
       timestamp: new Date().toLocaleString(),
@@ -35,6 +72,10 @@ export default function LeadDetails() {
 
     setComment("");
     setAuthor("");
+
+    // reload lead after comment
+    const updated = await getLeadById(id);
+    setLead(updated);
   };
 
   return (
@@ -42,8 +83,7 @@ export default function LeadDetails() {
       <Sidebar />
 
       <main className="flex-grow-1 p-4 bg-light container-fluid">
-        {/* Back button */}
-        <BackButton navigationPath="/leads" className="mb-3"/>
+        <BackButton navigationPath="/leads" className="mb-3" />
 
         {/* Header */}
         <div className="d-flex justify-content-between align-items-center mb-3">
@@ -57,12 +97,14 @@ export default function LeadDetails() {
           </button>
         </div>
 
-        {/* Lead details card */}
+        {/* Lead details */}
         <div className="card p-4 shadow-sm mb-4">
           <div className="row g-3">
             <div className="col-md-6">
               <span className="text-muted small">Sales Agent</span>
-              <div className="fw-semibold text-capitalize">{lead.agent}</div>
+              <div className="fw-semibold text-capitalize">
+                {lead.salesAgent?.name || "Not Assigned"}
+              </div>
             </div>
 
             <div className="col-md-6">
@@ -87,7 +129,7 @@ export default function LeadDetails() {
           </div>
         </div>
 
-        {/* Comments section */}
+        {/* Comments */}
         <div className="card p-4 shadow-sm">
           <h5 className="mb-3">Comments</h5>
 

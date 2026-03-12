@@ -3,27 +3,27 @@ export default function QuickFilters({ setFilter }) {
     <div className="mb-4">
       <button
         className="btn btn-outline-primary me-2"
-        onClick={() => setFilter("new")}
+        onClick={() => setFilter("New")}
       >
         New
       </button>
       <button
         className="btn btn-outline-primary"
-        onClick={() => setFilter("contacted")}
+        onClick={() => setFilter("Contacted")}
       >
         Contacted
       </button>
 
       <button
         className="btn btn-outline-success ms-2"
-        onClick={() => setFilter("qualified")}
+        onClick={() => setFilter("Qualified")}
       >
         Qualified
       </button>
 
       <button
         className="btn btn-outline-success ms-2"
-        onClick={() => setFilter("proposal send")}
+        onClick={() => setFilter("Proposal Sent")}
       >
         Proposal Sent
       </button>

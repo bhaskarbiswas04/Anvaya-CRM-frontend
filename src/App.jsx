@@ -20,7 +20,7 @@ export default function App() {
   return (
     <Routes>
       <Route path="/" element={<DashboardPage />} />
-      <Route path="/lead/:id" element={<LeadDetails />} />
+      <Route path="/leads/:id" element={<LeadDetails />} />
       <Route path="/leads" element={<LeadListPage />} />
       <Route path="/add-lead" element={<AddLeadsPage />} />
 

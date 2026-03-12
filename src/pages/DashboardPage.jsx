@@ -7,12 +7,22 @@ import LeadStats from "../components/dashboard-screen/LeadStats";
 import QuickFilters from "../components/dashboard-screen/QuickFilters";
 import AddLeadButton from "../components/dashboard-screen/AddLeadButton";
 
-
 export default function DashboardPage() {
-  // Get leads from context
-  const { leads } = useLeads();
+  const { leads, loading } = useLeads(); // get loading also
+  console.log(leads);
 
   const [filter, setFilter] = useState("");
+
+  if (loading) {
+    return (
+      <div className="d-flex vh-100">
+        <Sidebar />
+        <main className="flex-grow-1 p-4">
+          <h3>Loading Leads...</h3>
+        </main>
+      </div>
+    );
+  }
 
   const filteredLeads = filter
     ? leads.filter((l) => l.status === filter)

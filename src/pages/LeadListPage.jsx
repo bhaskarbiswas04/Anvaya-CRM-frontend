@@ -33,22 +33,24 @@ export default function LeadList() {
 
   let filtered = [...leads];
 
-  // Apply filters
+  // Status filter
   if (status !== "all") {
     filtered = filtered.filter((l) => l.status === status);
   }
 
+  // Agent filter
   if (agent !== "all") {
-    filtered = filtered.filter((l) => l.agent === agent);
+    filtered = filtered.filter((l) => l.salesAgent?.name === agent);
   }
 
+  // Source filter
   if (source !== "all") {
     filtered = filtered.filter((l) => l.source === source);
   }
 
   // Sorting
   if (sort === "priority") {
-    const order = { high: 1, medium: 2, low: 3 };
+    const order = { High: 1, Medium: 2, Low: 3 };
     filtered.sort((a, b) => order[a.priority] - order[b.priority]);
   }
 
@@ -56,7 +58,12 @@ export default function LeadList() {
     filtered.sort((a, b) => a.timeToClose - b.timeToClose);
   }
 
-  const agents = [...new Set(leads.map((l) => l.agent))];
+  // Agent list for dropdown
+  const agents = [
+    ...new Set(leads.map((l) => l.salesAgent?.name).filter(Boolean)),
+  ];
+
+  // Source list
   const sources = [...new Set(leads.map((l) => l.source))];
 
   return (
@@ -77,9 +84,11 @@ export default function LeadList() {
               onChange={(e) => setStatus(e.target.value)}
             >
               <option value="all">All</option>
-              <option value="new">New</option>
-              <option value="contacted">Contacted</option>
-              <option value="qualified">Qualified</option>
+              <option value="New">New</option>
+              <option value="Contacted">Contacted</option>
+              <option value="Qualified">Qualified</option>
+              <option value="Proposal Sent">Proposal Sent</option>
+              <option value="Closed">Closed</option>
             </select>
           </div>
 
@@ -164,11 +173,11 @@ export default function LeadList() {
                 <tr
                   key={lead.id}
                   style={{ cursor: "pointer" }}
-                  onClick={() => navigate(`/lead/${lead.id}`)}
+                  onClick={() => navigate(`/leads/${lead.id || lead._id}`)}
                 >
                   <td>{lead.name}</td>
-                  <td className="text-capitalize">{lead.status}</td>
-                  <td>{lead.agent}</td>
+                  <td>{lead.status}</td>
+                  <td>{lead.salesAgent.name}</td>
                   <td>{lead.source}</td>
                   <td className="text-capitalize">{lead.priority}</td>
                   <td>{lead.timeToClose} days</td>
