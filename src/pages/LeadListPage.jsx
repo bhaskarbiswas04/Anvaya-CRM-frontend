@@ -10,7 +10,6 @@ export default function LeadList() {
   const navigate = useNavigate();
   const [searchParams, setSearchParams] = useSearchParams();
 
-  // Read from URL
   const statusParam = searchParams.get("status") || "all";
   const agentParam = searchParams.get("agent") || "all";
   const sourceParam = searchParams.get("source") || "all";
@@ -20,7 +19,6 @@ export default function LeadList() {
   const [source, setSource] = useState(sourceParam);
   const [sort, setSort] = useState("");
 
-  // Sync filters with URL
   useEffect(() => {
     const params = {};
 
@@ -33,22 +31,18 @@ export default function LeadList() {
 
   let filtered = [...leads];
 
-  // Status filter
   if (status !== "all") {
     filtered = filtered.filter((l) => l.status === status);
   }
 
-  // Agent filter
   if (agent !== "all") {
     filtered = filtered.filter((l) => l.salesAgent?.name === agent);
   }
 
-  // Source filter
   if (source !== "all") {
     filtered = filtered.filter((l) => l.source === source);
   }
 
-  // Sorting
   if (sort === "priority") {
     const order = { High: 1, Medium: 2, Low: 3 };
     filtered.sort((a, b) => order[a.priority] - order[b.priority]);
@@ -58,24 +52,22 @@ export default function LeadList() {
     filtered.sort((a, b) => a.timeToClose - b.timeToClose);
   }
 
-  // Agent list for dropdown
   const agents = [
     ...new Set(leads.map((l) => l.salesAgent?.name).filter(Boolean)),
   ];
 
-  // Source list
   const sources = [...new Set(leads.map((l) => l.source))];
 
   return (
     <div className="d-flex vh-100">
       <Sidebar />
 
-      <main className="flex-grow-1 p-4 bg-light container-fluid">
+      {/* Make main column flex */}
+      <main className="flex-grow-1 d-flex flex-column p-4 bg-light container-fluid">
         <h3 className="mb-4 text-center">Lead List</h3>
 
         {/* FILTER BAR */}
         <div className="row g-2 mb-3">
-          {/* Status */}
           <div className="col-12 col-md">
             <label className="my-2">Status</label>
             <select
@@ -92,7 +84,6 @@ export default function LeadList() {
             </select>
           </div>
 
-          {/* Agent */}
           <div className="col-12 col-md">
             <label className="my-2">Sales Agent</label>
             <select
@@ -107,7 +98,6 @@ export default function LeadList() {
             </select>
           </div>
 
-          {/* Source */}
           <div className="col-12 col-md">
             <label className="my-2">Lead Source</label>
             <select
@@ -122,7 +112,6 @@ export default function LeadList() {
             </select>
           </div>
 
-          {/* Sort */}
           <div className="col-12 col-md">
             <label className="my-2">Sort By</label>
             <select
@@ -136,7 +125,6 @@ export default function LeadList() {
             </select>
           </div>
 
-          {/* Buttons */}
           <div className="col-12 col-md-auto d-flex align-items-end gap-2">
             <AddLeadButton />
 
@@ -154,37 +142,41 @@ export default function LeadList() {
           </div>
         </div>
 
-        {/* TABLE */}
-        <div className="card shadow-sm table-responsive">
-          <table className="table table-hover mb-0">
-            <thead>
-              <tr>
-                <th>Lead</th>
-                <th>Status</th>
-                <th>Sales Agent</th>
-                <th>Source</th>
-                <th>Priority</th>
-                <th>Time to Close</th>
-              </tr>
-            </thead>
+        {/* SCROLLABLE TABLE AREA */}
+        <div className="flex-grow-1 overflow-auto">
+          <div className="card shadow-sm h-100">
+            <div className="table-responsive h-100">
+              <table className="table table-hover mb-0">
+                <thead className="table-light sticky-top">
+                  <tr>
+                    <th>Lead</th>
+                    <th>Status</th>
+                    <th>Sales Agent</th>
+                    <th>Source</th>
+                    <th>Priority</th>
+                    <th>Time to Close</th>
+                  </tr>
+                </thead>
 
-            <tbody>
-              {filtered.map((lead) => (
-                <tr
-                  key={lead.id}
-                  style={{ cursor: "pointer" }}
-                  onClick={() => navigate(`/leads/${lead.id || lead._id}`)}
-                >
-                  <td>{lead.name}</td>
-                  <td>{lead.status}</td>
-                  <td>{lead.salesAgent.name}</td>
-                  <td>{lead.source}</td>
-                  <td className="text-capitalize">{lead.priority}</td>
-                  <td>{lead.timeToClose} days</td>
-                </tr>
-              ))}
-            </tbody>
-          </table>
+                <tbody>
+                  {filtered.map((lead) => (
+                    <tr
+                      key={lead.id || lead._id}
+                      style={{ cursor: "pointer" }}
+                      onClick={() => navigate(`/leads/${lead.id || lead._id}`)}
+                    >
+                      <td>{lead.name}</td>
+                      <td>{lead.status}</td>
+                      <td>{lead.salesAgent?.name}</td>
+                      <td>{lead.source}</td>
+                      <td>{lead.priority}</td>
+                      <td>{lead.timeToClose} days</td>
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
+            </div>
+          </div>
         </div>
       </main>
     </div>

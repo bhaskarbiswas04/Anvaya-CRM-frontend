@@ -1,43 +1,69 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useLeads } from "../context/LeadContext";
 import { useNavigate } from "react-router-dom";
 import BackButton from "./BackButton";
+import { fetchAgents } from "../services/agentService";
 
 export default function LeadForm() {
-  const { addLead, leads } = useLeads();
+  const { addLead } = useLeads();
   const navigate = useNavigate();
 
-  const agents = [...new Set(leads.map((l) => l.agent))];
+  const [agents, setAgents] = useState([]);
+
   const tagOptions = ["High Value", "Follow-up", "Hot", "Cold"];
 
   const [form, setForm] = useState({
     name: "",
     source: "",
-    agent: "",
-    status: "new",
-    priority: "medium",
+    salesAgent: "",
+    status: "New",
+    priority: "Medium",
     timeToClose: "",
     tags: [],
   });
+
+  // Load agents from API
+  useEffect(() => {
+    const loadAgents = async () => {
+      try {
+        const data = await fetchAgents();
+        setAgents(data);
+      } catch (err) {
+        console.error("Failed to fetch agents", err);
+      }
+    };
+
+    loadAgents();
+  }, []);
 
   const handleChange = (e) => {
     setForm({ ...form, [e.target.name]: e.target.value });
   };
 
-  const handleTags = (e) => {
-    const value = e.target.value;
+  const handleTags = (tag) => {
     setForm((prev) => ({
       ...prev,
-      tags: prev.tags.includes(value)
-        ? prev.tags.filter((t) => t !== value)
-        : [...prev.tags, value],
+      tags: prev.tags.includes(tag)
+        ? prev.tags.filter((t) => t !== tag)
+        : [...prev.tags, tag],
     }));
   };
 
-  const submit = (e) => {
+  const submit = async (e) => {
     e.preventDefault();
-    addLead(form);
-    navigate("/leads");
+
+    const payload = {
+      ...form,
+      timeToClose: Number(form.timeToClose),
+    };
+
+    console.log("Payload being sent:", payload);
+
+    const success = await addLead(payload);
+
+    if (success) {
+      navigate("/leads");
+    }
   };
 
   return (
@@ -72,25 +98,31 @@ export default function LeadForm() {
               required
             >
               <option value="">Select</option>
-              <option>Website</option>
-              <option>Referral</option>
-              <option>Cold Call</option>
+              <option value="Website">Website</option>
+              <option value="Referral">Referral</option>
+              <option value="Cold Call">Cold Call</option>
+              <option value="Advertisement">Advertisement</option>
+              <option value="Email">Email</option>
+              <option value="Other">Other</option>
             </select>
           </div>
 
-          {/* Agent */}
+          {/* Agent (from API) */}
           <div className="col-md-6">
             <label className="form-label">Sales Agent</label>
             <select
               className="form-select"
-              name="agent"
-              value={form.agent}
+              name="salesAgent"
+              value={form.salesAgent}
               onChange={handleChange}
               required
             >
               <option value="">Select</option>
-              {agents.map((a) => (
-                <option key={a}>{a}</option>
+
+              {agents.map((agent) => (
+                <option key={agent.id} value={agent.id}>
+                  {agent.name}
+                </option>
               ))}
             </select>
           </div>
@@ -104,11 +136,11 @@ export default function LeadForm() {
               value={form.status}
               onChange={handleChange}
             >
-              <option value="new">New</option>
-              <option value="contacted">Contacted</option>
-              <option value="qualified">Qualified</option>
-              <option value="proposal sent">Proposal Sent</option>
-              <option value="closed">Closed</option>
+              <option value="New">New</option>
+              <option value="Contacted">Contacted</option>
+              <option value="Qualified">Qualified</option>
+              <option value="Proposal Sent">Proposal Sent</option>
+              <option value="Closed">Closed</option>
             </select>
           </div>
 
@@ -121,9 +153,9 @@ export default function LeadForm() {
               value={form.priority}
               onChange={handleChange}
             >
-              <option value="high">High</option>
-              <option value="medium">Medium</option>
-              <option value="low">Low</option>
+              <option value="High">High</option>
+              <option value="Medium">Medium</option>
+              <option value="Low">Low</option>
             </select>
           </div>
 
@@ -136,12 +168,14 @@ export default function LeadForm() {
               name="timeToClose"
               value={form.timeToClose}
               onChange={handleChange}
+              required
             />
           </div>
 
           {/* Tags */}
           <div className="col-12">
             <label className="form-label">Tags</label>
+
             <div className="d-flex flex-wrap gap-2">
               {tagOptions.map((tag) => (
                 <button
@@ -152,7 +186,7 @@ export default function LeadForm() {
                       ? "btn-primary"
                       : "btn-outline-secondary"
                   }`}
-                  onClick={() => handleTags({ target: { value: tag } })}
+                  onClick={() => handleTags(tag)}
                 >
                   {tag}
                 </button>
@@ -162,11 +196,9 @@ export default function LeadForm() {
 
           {/* Submit */}
           <div className="mt-3 d-flex justify-content-center">
-            <button className="btn btn-primary me-3">
-              Create Lead
-            </button>
+            <button className="btn btn-primary me-3">Create Lead</button>
 
-            <BackButton navigationPath="/" />
+            <BackButton navigationPath="/leads" />
           </div>
         </form>
       </div>

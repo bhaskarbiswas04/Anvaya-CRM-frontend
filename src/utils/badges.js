@@ -1,8 +1,8 @@
 export const priorityBadge = (priority) => {
   const map = {
-    high: "danger",
-    medium: "warning",
-    low: "success",
+    High: "danger",
+    Medium: "warning",
+    Low: "success",
   };
 
   return map[priority] || "secondary";

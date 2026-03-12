@@ -33,10 +33,12 @@ export function LeadProvider({ children }) {
   // Add Lead
   const addLead = async (lead) => {
     try {
-      const newLead = await createLead(lead);
-      setLeads((prev) => [...prev, newLead]);
+      await createLead(lead);
+      await loadLeads();
+      return true;
     } catch (err) {
       console.error("Failed to create lead", err);
+      return false;
     }
   };
 
