@@ -4,9 +4,8 @@ import Sidebar from "../layouts/Sidebar";
 import { useAgents } from "../context/AgentContext";
 
 export default function SalesAgentsPage() {
-  const { agents } = useAgents();
+  const { agents, loading } = useAgents();
   const navigate = useNavigate();
-  const [open, setOpen] = useState(false);
   const [sidebarOpen, setSidebarOpen] = useState(false);
 
   return (
@@ -25,23 +24,27 @@ export default function SalesAgentsPage() {
         <h3 className="mb-4 text-center">Sales Agent Management</h3>
 
         <div className="card shadow-sm p-3">
-          <table className="table">
-            <thead>
-              <tr>
-                <th>Agent Name</th>
-                <th>Email</th>
-              </tr>
-            </thead>
-
-            <tbody>
-              {agents.map((agent) => (
-                <tr key={agent.id}>
-                  <td>{agent.name}</td>
-                  <td>{agent.email}</td>
+          {loading ? (
+            <p className="text-center">Loading agents...</p>
+          ) : (
+            <table className="table">
+              <thead>
+                <tr>
+                  <th>Agent Name</th>
+                  <th>Email</th>
                 </tr>
-              ))}
-            </tbody>
-          </table>
+              </thead>
+
+              <tbody>
+                {agents.map((agent) => (
+                  <tr key={agent.id || agent._id}>
+                    <td>{agent.name}</td>
+                    <td>{agent.email}</td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          )}
 
           <div className="mt-3 d-flex justify-content-center">
             <button
@@ -52,8 +55,6 @@ export default function SalesAgentsPage() {
             </button>
           </div>
         </div>
-
-        {/* {open && <AddAgentModal close={() => setOpen(false)} />} */}
       </main>
     </div>
   );

@@ -21,7 +21,7 @@ export default function AddAgentPage() {
       email,
     });
 
-    navigate("/sales");
+    navigate("/agents");
   };
 
   return (
