@@ -26,7 +26,7 @@ export default function ReportsPage() {
   const { leads } = useLeads();
 
   // Closed vs Pipeline leads
-  const closedLeads = leads.filter((l) => l.status === "closed").length;
+  const closedLeads = leads.filter((l) => l.status === "Closed").length;
   const pipelineLeads = leads.length - closedLeads;
 
   const pipelineData = {
@@ -44,7 +44,7 @@ export default function ReportsPage() {
 
   const agentCounts = agents.map(
     (agent) =>
-      leads.filter((l) => l.agent === agent && l.status === "closed").length,
+      leads.filter((l) => l.agent === agent && l.status === "Closed").length,
   );
 
   const agentData = {
