@@ -12,6 +12,7 @@ export default function AddAgentPage() {
 
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
+  
 
   const submit = () => {
     if (!name.trim() || !email.trim()) return;

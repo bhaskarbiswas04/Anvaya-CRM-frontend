@@ -1,8 +1,6 @@
 import { useState, useEffect } from "react";
-import { useToast } from "../context/ToastContext";
 
 export default function EditLeadModal({ lead, updateLead, close }) {
-  const { showToast } = useToast();
 
   const [form, setForm] = useState({
     name: "",
@@ -57,7 +55,6 @@ export default function EditLeadModal({ lead, updateLead, close }) {
 
     await updateLead(updatedLead);
 
-    showToast("Lead updated successfully.");
     close();
   };
 

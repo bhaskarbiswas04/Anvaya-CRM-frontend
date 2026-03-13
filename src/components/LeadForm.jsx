@@ -3,12 +3,10 @@ import { useLeads } from "../context/LeadContext";
 import { useNavigate } from "react-router-dom";
 import BackButton from "./BackButton";
 import { fetchAgents } from "../services/agentService";
-import { useToast } from "../context/ToastContext";
 
 export default function LeadForm() {
   const { addLead } = useLeads();
   const navigate = useNavigate();
-  const { showToast } = useToast();
 
   const [agents, setAgents] = useState([]);
   
@@ -61,7 +59,6 @@ export default function LeadForm() {
     });
 
     if (success) {
-      showToast("Lead created successfully.");
       navigate("/leads");
     }
   };
