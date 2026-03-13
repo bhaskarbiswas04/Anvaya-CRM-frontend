@@ -38,7 +38,7 @@ export default function QuickFilters({ filter, setFilter }) {
         }`}
         onClick={() => setFilter("")}
       >
-        All
+        Recent
       </button>
     </div>
   );

@@ -21,8 +21,6 @@ export default function LeadDetails() {
     const loadLead = async () => {
       try {
         const data = await getLeadById(id);
-        console.log(data);
-        
         setLead(data);
       } catch (err) {
         console.error("Failed to load lead", err);
@@ -32,7 +30,9 @@ export default function LeadDetails() {
     };
 
     if (id) loadLead();
-  }, [id, getLeadById]);
+  }, [id]);
+
+  const leadId = lead?._id || lead?.id;
 
   // Generate agents list safely
   const agents = [
@@ -64,7 +64,7 @@ export default function LeadDetails() {
   const submit = async () => {
     if (!comment.trim() || !author) return;
 
-    await addComment(lead.id, {
+    await addComment(leadId, {
       text: comment,
       author,
       timestamp: new Date().toLocaleString(),
@@ -74,7 +74,7 @@ export default function LeadDetails() {
     setAuthor("");
 
     // reload lead after comment
-    const updated = await getLeadById(id);
+    const updated = await getLeadById(leadId);
     setLead(updated);
   };
 
@@ -103,7 +103,7 @@ export default function LeadDetails() {
             <div className="col-md-6">
               <span className="text-muted small">Sales Agent</span>
               <div className="fw-semibold text-capitalize">
-                {lead.salesAgent?.name || "Not Assigned"}
+                {lead.salesAgent?.name}
               </div>
             </div>
 
@@ -126,6 +126,26 @@ export default function LeadDetails() {
               <span className="text-muted small">Time to Close</span>
               <div className="fw-semibold">{lead.timeToClose} days</div>
             </div>
+
+            {/* Tags */}
+            <div className="col-12">
+              <span className="text-muted small">Tags</span>
+
+              <div className="d-flex flex-wrap gap-2 mt-1">
+                {lead.tags?.length ? (
+                  lead.tags.map((tag) => (
+                    <span
+                      key={tag}
+                      className="badge bg-light text-dark border p-2"
+                    >
+                      {tag}
+                    </span>
+                  ))
+                ) : (
+                  <span className="text-muted">No Tags</span>
+                )}
+              </div>
+            </div>
           </div>
         </div>
 
@@ -137,8 +157,8 @@ export default function LeadDetails() {
             <p className="text-muted">No comments yet.</p>
           )}
 
-          {lead.comments?.map((c) => (
-            <div key={c.id} className="border-bottom mb-2 pb-2">
+          {lead.comments?.map((c, index) => (
+            <div key={index} className="border-bottom mb-2 pb-2">
               <strong>{c.author}</strong>
               <small className="text-muted ms-2">{c.timestamp}</small>
               <p className="mb-0">{c.text}</p>
@@ -181,7 +201,14 @@ export default function LeadDetails() {
         {open && (
           <EditLeadModal
             lead={lead}
-            updateLead={updateLead}
+            updateLead={async (updatedLead) => {
+              await updateLead(updatedLead);
+
+              const freshLead = await getLeadById(
+                updatedLead.id || updatedLead._id,
+              );
+              setLead(freshLead);
+            }}
             close={() => setOpen(false)}
           />
         )}

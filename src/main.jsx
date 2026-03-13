@@ -7,9 +7,11 @@ import { createRoot } from "react-dom/client";
 import { BrowserRouter } from "react-router-dom";
 import { LeadProvider } from "./context/LeadContext";
 import { AgentProvider } from "./context/AgentContext.jsx";
+import { ToastProvider } from "./context/ToastContext.jsx";
 
 createRoot(document.getElementById("root")).render(
   <StrictMode>
+    <ToastProvider>
     <BrowserRouter>
       <LeadProvider>
         <AgentProvider>
@@ -17,5 +19,6 @@ createRoot(document.getElementById("root")).render(
         </AgentProvider>
       </LeadProvider>
     </BrowserRouter>
+    </ToastProvider>
   </StrictMode>,
 );

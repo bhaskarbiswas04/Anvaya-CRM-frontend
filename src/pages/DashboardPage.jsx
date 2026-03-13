@@ -49,7 +49,7 @@ export default function DashboardPage() {
           </div>
 
           {/* Recent Leads */}
-          <LeadPreview leads={filteredLeads} />
+          <LeadPreview leads={filteredLeads} filter={filter} />
         </div>
       </main>
     </div>

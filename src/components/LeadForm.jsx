@@ -3,12 +3,15 @@ import { useLeads } from "../context/LeadContext";
 import { useNavigate } from "react-router-dom";
 import BackButton from "./BackButton";
 import { fetchAgents } from "../services/agentService";
+import { useToast } from "../context/ToastContext";
 
 export default function LeadForm() {
   const { addLead } = useLeads();
   const navigate = useNavigate();
+  const { showToast } = useToast();
 
   const [agents, setAgents] = useState([]);
+  
 
   const tagOptions = ["High Value", "Follow-up", "Hot", "Cold"];
 
@@ -52,16 +55,13 @@ export default function LeadForm() {
   const submit = async (e) => {
     e.preventDefault();
 
-    const payload = {
+    const success = await addLead({
       ...form,
       timeToClose: Number(form.timeToClose),
-    };
-
-    console.log("Payload being sent:", payload);
-
-    const success = await addLead(payload);
+    });
 
     if (success) {
+      showToast("Lead created successfully.");
       navigate("/leads");
     }
   };

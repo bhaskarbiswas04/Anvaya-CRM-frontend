@@ -1,6 +1,7 @@
 import { useNavigate } from "react-router-dom";
 import { priorityBadge } from "../../utils/badges";
 
+
 function timeAgo(date) {
   const now = new Date();
   const created = new Date(date);
@@ -20,7 +21,7 @@ function timeAgo(date) {
   return `${days} days ago`;
 }
 
-export default function LeadPreview({ leads }) {
+export default function LeadPreview({ leads, filter }) {
   const navigate = useNavigate();
 
   const visibleLeads = [...leads]
@@ -31,7 +32,9 @@ export default function LeadPreview({ leads }) {
 
   return (
     <div className="row my-4">
-      <h4 className="text-success">Recent Leads</h4>
+      <h4 className="mb-3 text-success">
+        {filter ? `${filter} Leads` : "Recent Leads"}
+      </h4>
       {visibleLeads.map((lead) => (
         <div key={lead._id || lead.id} className="col-12 col-md-3 mt-2">
           <div

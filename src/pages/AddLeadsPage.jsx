@@ -5,7 +5,7 @@ export default function AddLeadsPage() {
   return (
     <div className="d-flex vh-100">
       <Sidebar />
-      <main className="flex-grow-1 bg-light">
+      <main className="flex-grow-1 bg-light my-4">
         <LeadForm />
       </main>
     </div>

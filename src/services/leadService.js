@@ -24,7 +24,7 @@ export const createLead = async (lead) => {
 
 export const updateLead = async (id, lead) => {
   const res = await fetch(`${API_BASE_URL}/leads/${id}`, {
-    method: "PUT",
+    method: "POST",
     headers: {
       "Content-Type": "application/json",
     },
