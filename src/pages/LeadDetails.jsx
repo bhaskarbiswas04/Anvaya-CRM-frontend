@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { useParams } from "react-router-dom";
+import { useParams, useNavigate } from "react-router-dom";
 
 // imports : Context
 import { useLeads } from "../context/LeadContext";
@@ -12,8 +12,9 @@ import BackButton from "../components/BackButton";
 
 export default function LeadDetails() {
   const { id } = useParams();
+  const navigate = useNavigate();
 
-  const { addComment, updateLead, getLeadById, getComments } = useLeads();
+  const { addComment, updateLead, getLeadById, getComments, deleteLead } = useLeads();
   const { agents } = useAgents();
 
   const [lead, setLead] = useState(null);
@@ -87,6 +88,21 @@ export default function LeadDetails() {
     setAuthor("");
   };
 
+  // handle deletion of Lead.
+  const handleDelete = async () => {
+    const confirmDelete = window.confirm(
+      "Are you sure you want to delete this lead?",
+    );
+
+    if (!confirmDelete) return;
+
+    const success = await deleteLead(leadId);
+
+    if (success) {
+      navigate("/leads");
+    }
+  };
+
   return (
     <div className="d-flex vh-100">
       <Sidebar />
@@ -99,12 +115,18 @@ export default function LeadDetails() {
           <div className="d-flex justify-content-between align-items-center mb-3">
             <h3>Lead : {lead.name}</h3>
 
-            <button
-              className="btn btn-outline-primary"
-              onClick={() => setOpen(true)}
-            >
-              Edit Lead
-            </button>
+            <div className="d-flex gap-2">
+              <button
+                className="btn btn-outline-primary"
+                onClick={() => setOpen(true)}
+              >
+                Edit
+              </button>
+
+              <button className="btn btn-outline-danger" onClick={handleDelete}>
+                Delete
+              </button>
+            </div>
           </div>
 
           {/* Lead details */}

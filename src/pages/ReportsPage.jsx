@@ -34,7 +34,7 @@ export default function ReportsPage() {
     datasets: [
       {
         data: [closedLeads, pipelineLeads],
-        backgroundColor: ["#198754", "#0d6efd"],
+        backgroundColor: ["#10B981", "#3B82F6"],
       },
     ],
   };
@@ -47,16 +47,16 @@ export default function ReportsPage() {
       leads.filter((l) => l.agent === agent && l.status === "Closed").length,
   );
 
-  const agentData = {
-    labels: agents,
-    datasets: [
-      {
-        label: "Closed Leads",
-        data: agentCounts,
-        backgroundColor: "#0d6efd",
-      },
-    ],
-  };
+  // const agentData = {
+  //   labels: agents,
+  //   datasets: [
+  //     {
+  //       label: "Closed Leads",
+  //       data: agentCounts,
+  //       backgroundColor: "#0d6efd",
+  //     },
+  //   ],
+  // };
 
   // Status Distribution
   const statuses = [...new Set(leads.map((l) => l.status))];
@@ -71,11 +71,11 @@ export default function ReportsPage() {
       {
         data: statusCounts,
         backgroundColor: [
+          "#00FFFF",
           "#198754",
+          "#6c757d",
           "#0d6efd",
           "#ffc107",
-          "#dc3545",
-          "#6c757d",
         ],
       },
     ],
@@ -88,10 +88,10 @@ export default function ReportsPage() {
       <main className="flex-grow-1 p-4 bg-light container-fluid">
         <h3 className="mb-4 text-center">Anvaya CRM Reports</h3>
 
-        <div className="row g-4">
-          {/* Closed vs Pipeline */}
+        <div className="row g-4 justify-content-center">
 
-          <div className="col-lg-4 col-md-6 col-12">
+          {/* Closed vs Pipeline */}
+          <div className="col-lg-5 col-md-6 col-12">
             <div className="card p-3 shadow-sm h-100">
               <h6 className="text-center">Leads Closed vs Pipeline</h6>
 
@@ -101,17 +101,17 @@ export default function ReportsPage() {
 
           {/* Leads by Agent */}
 
-          <div className="col-lg-4 col-md-6 col-12">
+          {/* <div className="col-lg-4 col-md-6 col-12">
             <div className="card p-3 shadow-sm h-100">
               <h6 className="text-center">Leads Closed by Sales Agent</h6>
 
               <Bar data={agentData} />
             </div>
-          </div>
+          </div> */}
 
           {/* Status Distribution */}
 
-          <div className="col-lg-4 col-md-12 col-12">
+          <div className="col-lg-5 col-md-12 col-12">
             <div className="card p-3 shadow-sm h-100">
               <h6 className="text-center">Lead Status Distribution</h6>
 
