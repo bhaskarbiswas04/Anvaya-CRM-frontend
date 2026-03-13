@@ -6,6 +6,7 @@ import {
   updateLead,
   deleteLead,
   addComment as addCommentAPI,
+  getCommentsById,
 } from "../services/leadService";
 
 const LeadContext = createContext();
@@ -76,11 +77,22 @@ export function LeadProvider({ children }) {
   // Add Comment
   const addComment = async (leadId, comment) => {
     try {
-      const updatedLead = await addCommentAPI(leadId, comment);
-
-      setLeads((prev) => prev.map((l) => (l.id === leadId ? updatedLead : l)));
+      const newComment = await addCommentAPI(leadId, comment);
+      return newComment;
     } catch (err) {
       console.error("Failed to add comment", err);
+      return null;
+    }
+  };
+
+  // Get comments for a lead
+  const getComments = async (leadId) => {
+    try {
+      const comments = await getCommentsById(leadId);
+      return comments;
+    } catch (err) {
+      console.error("Failed to fetch comments", err);
+      return [];
     }
   };
 
@@ -94,6 +106,7 @@ export function LeadProvider({ children }) {
         updateLead: updateLeadData,
         deleteLead: deleteLeadData,
         addComment,
+        getComments,
         refreshLeads: loadLeads,
       }}
     >

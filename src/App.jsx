@@ -1,4 +1,7 @@
 import { Routes, Route } from "react-router-dom";
+import "bootstrap/dist/css/bootstrap.min.css";
+import "bootstrap/dist/js/bootstrap.bundle.min.js";
+
 import DashboardPage from "./pages/DashboardPage"
 import LeadDetailsPage from "./pages/LeadDetails";
 import LeadListPage from "./pages/LeadListPage";

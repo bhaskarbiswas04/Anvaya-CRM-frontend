@@ -1,4 +1,5 @@
 import { API_BASE_URL } from "../api/config";
+import LeadList from "../pages/LeadListPage";
 
 export const fetchLeads = async () => {
   const res = await fetch(`${API_BASE_URL}/leads`);
@@ -53,3 +54,8 @@ export const addComment = async (leadId, comment) => {
 
   return await res.json();
 };
+
+export const getCommentsById = async (leadId) => {
+  const res = await fetch(`${API_BASE_URL}/leads/${leadId}/comments`);
+  return await res.json();
+}
