@@ -39,24 +39,34 @@ export default function ReportsPage() {
     ],
   };
 
-  // Leads by Sales Agent
-  const agents = [...new Set(leads.map((l) => l.agent))];
+  // Leads Closed by Sales Agent
+  const agentMap = {};
 
-  const agentCounts = agents.map(
-    (agent) =>
-      leads.filter((l) => l.agent === agent && l.status === "Closed").length,
-  );
+  leads.forEach((lead) => {
+    const agentName = lead.salesAgent?.name || "Unassigned";
 
-  // const agentData = {
-  //   labels: agents,
-  //   datasets: [
-  //     {
-  //       label: "Closed Leads",
-  //       data: agentCounts,
-  //       backgroundColor: "#0d6efd",
-  //     },
-  //   ],
-  // };
+    if (!agentMap[agentName]) {
+      agentMap[agentName] = 0;
+    }
+
+    if (lead.status === "Closed") {
+      agentMap[agentName] += 1;
+    }
+  });
+
+  const agents = Object.keys(agentMap);
+  const agentCounts = Object.values(agentMap);
+
+  const agentData = {
+    labels: agents,
+    datasets: [
+      {
+        label: "Closed Leads",
+        data: agentCounts,
+        backgroundColor: "#0d6efd",
+      },
+    ],
+  };
 
   // Status Distribution
   const statuses = [...new Set(leads.map((l) => l.status))];
@@ -89,9 +99,8 @@ export default function ReportsPage() {
         <h3 className="mb-4 text-center">Anvaya CRM Reports</h3>
 
         <div className="row g-4 justify-content-center">
-
           {/* Closed vs Pipeline */}
-          <div className="col-lg-5 col-md-6 col-12">
+          <div className="col-lg-4 col-md-6 col-12">
             <div className="card p-3 shadow-sm h-100">
               <h6 className="text-center">Leads Closed vs Pipeline</h6>
 
@@ -101,17 +110,17 @@ export default function ReportsPage() {
 
           {/* Leads by Agent */}
 
-          {/* <div className="col-lg-4 col-md-6 col-12">
+          <div className="col-lg-4 col-md-6 col-12">
             <div className="card p-3 shadow-sm h-100">
               <h6 className="text-center">Leads Closed by Sales Agent</h6>
 
               <Bar data={agentData} />
             </div>
-          </div> */}
+          </div>
 
           {/* Status Distribution */}
 
-          <div className="col-lg-5 col-md-12 col-12">
+          <div className="col-lg-4 col-md-12 col-12">
             <div className="card p-3 shadow-sm h-100">
               <h6 className="text-center">Lead Status Distribution</h6>
 
