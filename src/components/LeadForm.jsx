@@ -3,15 +3,18 @@ import { useLeads } from "../context/LeadContext";
 import { useNavigate } from "react-router-dom";
 import BackButton from "./BackButton";
 import { fetchAgents } from "../services/agentService";
+import { fetchTags, createTag } from "../services/tagService";
 
 export default function LeadForm() {
   const { addLead } = useLeads();
   const navigate = useNavigate();
 
   const [agents, setAgents] = useState([]);
-  
+  const [allTags, setAllTags] = useState([]);
 
-  const tagOptions = ["High Value", "Follow-up", "Hot", "Cold"];
+  const [showTagInput, setShowTagInput] = useState(false);
+  const [showTagsModal, setShowTagsModal] = useState(false);
+  const [newTag, setNewTag] = useState("");
 
   const [form, setForm] = useState({
     name: "",
@@ -23,18 +26,22 @@ export default function LeadForm() {
     tags: [],
   });
 
-  // Load agents from API
+  // Load agents
   useEffect(() => {
     const loadAgents = async () => {
-      try {
-        const data = await fetchAgents();
-        setAgents(data);
-      } catch (err) {
-        console.error("Failed to fetch agents", err);
-      }
+      const data = await fetchAgents();
+      setAgents(data);
     };
-
     loadAgents();
+  }, []);
+
+  // Load tags
+  useEffect(() => {
+    const loadTags = async () => {
+      const tags = await fetchTags();
+      setAllTags(tags);
+    };
+    loadTags();
   }, []);
 
   const handleChange = (e) => {
@@ -48,6 +55,22 @@ export default function LeadForm() {
         ? prev.tags.filter((t) => t !== tag)
         : [...prev.tags, tag],
     }));
+  };
+
+  const handleAddTag = async () => {
+    if (!newTag.trim()) return;
+
+    const created = await createTag(newTag);
+
+    setAllTags((prev) => [...prev, created]);
+
+    setForm((prev) => ({
+      ...prev,
+      tags: [...prev.tags, created.name],
+    }));
+
+    setNewTag("");
+    setShowTagInput(false);
   };
 
   const submit = async (e) => {
@@ -104,7 +127,7 @@ export default function LeadForm() {
             </select>
           </div>
 
-          {/* Agent (from API) */}
+          {/* Agent */}
           <div className="col-md-6">
             <label className="form-label">Sales Agent</label>
             <select
@@ -115,7 +138,6 @@ export default function LeadForm() {
               required
             >
               <option value="">Select</option>
-
               {agents.map((agent) => (
                 <option key={agent.id} value={agent.id}>
                   {agent.name}
@@ -169,24 +191,51 @@ export default function LeadForm() {
             />
           </div>
 
-          {/* Tags */}
+          {/* TAGS */}
           <div className="col-12">
             <label className="form-label">Tags</label>
 
-            <div className="d-flex flex-wrap gap-2">
-              {tagOptions.map((tag) => (
+            <div className="d-flex gap-2 mb-2">
+              <button
+                type="button"
+                className="btn btn-sm btn-outline-primary"
+                onClick={() => setShowTagInput(!showTagInput)}
+              >
+                Add Tag
+              </button>
+
+              <button
+                type="button"
+                className="btn btn-sm btn-outline-secondary"
+                onClick={() => setShowTagsModal(true)}
+              >
+                Show All Tags
+              </button>
+            </div>
+
+            {showTagInput && (
+              <div className="d-flex gap-2 mb-2">
+                <input
+                  className="form-control"
+                  placeholder="Enter new tag"
+                  value={newTag}
+                  onChange={(e) => setNewTag(e.target.value)}
+                />
                 <button
                   type="button"
-                  key={tag}
-                  className={`btn btn-sm ${
-                    form.tags.includes(tag)
-                      ? "btn-primary"
-                      : "btn-outline-secondary"
-                  }`}
-                  onClick={() => handleTags(tag)}
+                  className="btn btn-success"
+                  onClick={handleAddTag}
                 >
-                  {tag}
+                  Add
                 </button>
+              </div>
+            )}
+
+            <div className="d-flex flex-wrap gap-2">
+              {form.tags.map((tag) => (
+                <span key={tag} className="badge bg-primary">
+                  {tag}
+                </span>
               ))}
             </div>
           </div>
@@ -194,10 +243,43 @@ export default function LeadForm() {
           {/* Submit */}
           <div className="mt-3 d-flex justify-content-center">
             <button className="btn btn-primary me-3">Create Lead</button>
-
             <BackButton navigationPath="/leads" />
           </div>
         </form>
+
+        {/* TAG MODAL */}
+        {showTagsModal && (
+          <div
+            className="modal show d-block"
+            style={{ background: "#00000080" }}
+          >
+            <div className="modal-dialog">
+              <div className="modal-content p-3">
+                <h5>Available Tags</h5>
+
+                <div className="d-flex flex-wrap gap-2 my-3">
+                  {allTags.map((tag) => (
+                    <span
+                      key={tag._id}
+                      className="badge bg-light border text-dark p-2"
+                      style={{ cursor: "pointer" }}
+                      onClick={() => handleTags(tag.name)}
+                    >
+                      {tag.name}
+                    </span>
+                  ))}
+                </div>
+
+                <button
+                  className="btn btn-secondary"
+                  onClick={() => setShowTagsModal(false)}
+                >
+                  Close
+                </button>
+              </div>
+            </div>
+          </div>
+        )}
       </div>
     </div>
   );
