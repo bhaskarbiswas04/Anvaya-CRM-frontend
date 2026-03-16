@@ -58,8 +58,11 @@ export default function LeadStatusView() {
                 {status} ({statusLeads.length})
               </h6>
 
-              <div className="table-responsive">
-                <table className="table table-sm table-fixed">
+              <div className="table-responsive" style={{ overflowX: "auto" }}>
+                <table
+                  className="table table-sm table-fixed"
+                  style={{ minWidth: "500px" }}
+                >
                   <thead className="table-light">
                     <tr>
                       <th>Lead</th>
