@@ -1,6 +1,7 @@
 import { useNavigate, useSearchParams } from "react-router-dom";
 import { useState, useEffect } from "react";
 import { useLeads } from "../context/LeadContext";
+import { useAgents } from "../context/AgentContext";
 
 import ScreensLayout from "../layouts/ScreensLayout";
 import AddLeadButton from "../components/dashboard-screen/AddLeadButton";
@@ -8,6 +9,7 @@ import PageLoader from "../components/ui/PageLoader";
 
 export default function LeadList() {
   const { leads, loading } = useLeads();
+  const { agents } = useAgents();
   const navigate = useNavigate();
   const [searchParams, setSearchParams] = useSearchParams();
 
@@ -66,10 +68,6 @@ export default function LeadList() {
     filtered.sort((a, b) => a.timeToClose - b.timeToClose);
   }
 
-  const agents = [
-    ...new Set(leads.map((l) => l.salesAgent?.name).filter(Boolean)),
-  ];
-
   const sources = [...new Set(leads.map((l) => l.source))];
 
   if (loading) {
@@ -111,8 +109,10 @@ export default function LeadList() {
               onChange={(e) => setAgent(e.target.value)}
             >
               <option value="all">All</option>
-              {agents.map((a) => (
-                <option key={a}>{a}</option>
+              {agents.map((agent) => (
+                <option key={agent.id || agent._id} value={agent.name}>
+                  {agent.name}
+                </option>
               ))}
             </select>
           </div>

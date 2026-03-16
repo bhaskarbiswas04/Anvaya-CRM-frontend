@@ -1,4 +1,5 @@
 import { useLeads } from "../context/LeadContext";
+import { useAgents } from "../context/AgentContext";
 import ScreensLayout from "../layouts/ScreensLayout";
 
 import {
@@ -24,8 +25,9 @@ ChartJS.register(
 
 export default function ReportsPage() {
   const { leads } = useLeads();
+  const { agents } = useAgents();
 
-  // Closed vs Pipeline leads
+  // Closed vs Pipeline
   const closedLeads = leads.filter((l) => l.status === "Closed").length;
   const pipelineLeads = leads.length - closedLeads;
 
@@ -39,26 +41,24 @@ export default function ReportsPage() {
     ],
   };
 
-  // Leads Closed by Sales Agent
-  const agentMap = {};
+  // Leads Closed by Agent (Using Agents API)
+  const agentDataMap = {};
 
-  leads.forEach((lead) => {
-    const agentName = lead.salesAgent?.name || "Unassigned";
+  agents.forEach((agent) => {
+    const agentName = agent.name;
 
-    if (!agentMap[agentName]) {
-      agentMap[agentName] = 0;
-    }
+    const closedCount = leads.filter(
+      (lead) => lead.salesAgent?.name === agentName && lead.status === "Closed",
+    ).length;
 
-    if (lead.status === "Closed") {
-      agentMap[agentName] += 1;
-    }
+    agentDataMap[agentName] = closedCount;
   });
 
-  const agents = Object.keys(agentMap);
-  const agentCounts = Object.values(agentMap);
+  const agentLabels = Object.keys(agentDataMap);
+  const agentCounts = Object.values(agentDataMap);
 
   const agentData = {
-    labels: agents,
+    labels: agentLabels,
     datasets: [
       {
         label: "Closed Leads",
@@ -105,7 +105,7 @@ export default function ReportsPage() {
             </div>
           </div>
 
-          {/* Leads by Agent */}
+          {/* Leads Closed by Agent */}
           <div className="col-lg-4 col-md-6 col-12">
             <div className="card p-3 shadow-sm h-100">
               <h6 className="text-center">Leads Closed by Sales Agent</h6>
