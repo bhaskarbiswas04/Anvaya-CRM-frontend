@@ -18,6 +18,7 @@ export default function LeadList() {
   const [agent, setAgent] = useState(agentParam);
   const [source, setSource] = useState(sourceParam);
   const [sort, setSort] = useState("");
+  const [search, setSearch] = useState("");
 
   useEffect(() => {
     const params = {};
@@ -30,6 +31,18 @@ export default function LeadList() {
   }, [status, agent, source]);
 
   let filtered = [...leads];
+
+  // --Search_Logic
+  if (search.trim() !== "") {
+    const searchLower = search.toLowerCase();
+
+    filtered = filtered.filter(
+      (lead) =>
+        lead.name?.toLowerCase().includes(searchLower) ||
+        lead.salesAgent?.name?.toLowerCase().includes(searchLower) ||
+        lead.source?.toLowerCase().includes(searchLower),
+    );
+  }
 
   if (status !== "all") {
     filtered = filtered.filter((l) => l.status === status);
@@ -62,6 +75,17 @@ export default function LeadList() {
     <ScreensLayout>
       <div className="p-4 bg-light min-vh-100">
         <h3 className="mb-4 text-center">Lead List</h3>
+
+        {/* SEARCH */}
+        <div className="mb-3">
+          <input
+            type="text"
+            className="form-control"
+            placeholder="Search leads by name, agent, or source..."
+            value={search}
+            onChange={(e) => setSearch(e.target.value)}
+          />
+        </div>
 
         {/* FILTER BAR */}
         <div className="row g-2 mb-3">
@@ -140,8 +164,11 @@ export default function LeadList() {
         </div>
 
         {/* TABLE */}
-        <div className="card shadow-sm">
-          <div className="table-responsive">
+        <div className="card shadow-sm" style={{ maxHeight: "65vh" }}>
+          <div
+            className="table-responsive overflow-auto"
+            style={{ maxHeight: "65vh" }}
+          >
             <table className="table table-hover mb-0">
               <thead className="table-light">
                 <tr>
