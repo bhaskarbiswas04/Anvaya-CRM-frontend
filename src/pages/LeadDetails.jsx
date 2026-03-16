@@ -9,7 +9,7 @@ import { useAgents } from "../context/AgentContext";
 import ScreensLayout from "../layouts/ScreensLayout";
 
 // Components
-import EditLeadModal from "../components/EditLeadModal";
+import EditLeadModal from "../components/ui/EditLeadModal";
 import BackButton from "../components/ui/BackButton";
 import PageLoader from "../components/ui/PageLoader";
 

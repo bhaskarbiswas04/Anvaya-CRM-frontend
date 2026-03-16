@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
-import { fetchTags, createTag } from "../services/tagService";
-import { useAgents } from "../context/AgentContext";
+import { fetchTags, createTag } from "../../services/tagService";
+import { useAgents } from "../../context/AgentContext";
 
 export default function EditLeadModal({ lead, updateLead, close }) {
   const { agents } = useAgents();
@@ -102,29 +102,7 @@ export default function EditLeadModal({ lead, updateLead, close }) {
                 onChange={handleChange}
               />
             </div>
-
-            {/* Sales Agent */}
-            <div className="col-md-6">
-              <label className="form-label fw-semibold">Sales Agent</label>
-              <select
-                className="form-select"
-                name="salesAgent"
-                value={form.salesAgent}
-                onChange={handleChange}
-              >
-                <option value="">Select Agent</option>
-
-                {agents.map((agent) => (
-                  <option
-                    key={agent.id || agent._id}
-                    value={agent.id || agent._id}
-                  >
-                    {agent.name}
-                  </option>
-                ))}
-              </select>
-            </div>
-
+            
             {/* Status */}
             <div className="col-md-6">
               <label className="form-label fw-semibold">Status</label>

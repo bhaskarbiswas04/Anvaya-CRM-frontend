@@ -1,5 +1,5 @@
 import Sidebar from "../layouts/Sidebar";
-import LeadForm from "../components/LeadForm";
+import LeadForm from "../components/ui/LeadForm";
 
 export default function AddLeadsPage() {
   return (
