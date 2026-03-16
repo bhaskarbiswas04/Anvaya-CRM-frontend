@@ -2,10 +2,19 @@ import { useNavigate } from "react-router-dom";
 import { useAgents } from "../context/AgentContext";
 
 import ScreensLayout from "../layouts/ScreensLayout";
+import PageLoader from "../components/ui/PageLoader";
 
 export default function SalesAgentsPage() {
   const { agents, loading } = useAgents();
   const navigate = useNavigate();
+
+  if (loading) {
+    return (
+      <ScreensLayout>
+        <PageLoader text="Loading agents..." />
+      </ScreensLayout>
+    );
+  }
 
   return (
     <ScreensLayout>
@@ -13,8 +22,10 @@ export default function SalesAgentsPage() {
         <h3 className="mb-4 text-center">Sales Agent Management</h3>
 
         <div className="card shadow-sm p-3">
-          {loading ? (
-            <p className="text-center">Loading agents...</p>
+          {agents.length === 0 ? (
+            <p className="text-center text-muted py-4">
+              No agents found. Add your first sales agent.
+            </p>
           ) : (
             <table className="table">
               <thead>

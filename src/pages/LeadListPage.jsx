@@ -4,9 +4,10 @@ import { useLeads } from "../context/LeadContext";
 
 import ScreensLayout from "../layouts/ScreensLayout";
 import AddLeadButton from "../components/dashboard-screen/AddLeadButton";
+import PageLoader from "../components/ui/PageLoader";
 
 export default function LeadList() {
-  const { leads } = useLeads();
+  const { leads, loading } = useLeads();
   const navigate = useNavigate();
   const [searchParams, setSearchParams] = useSearchParams();
 
@@ -70,6 +71,14 @@ export default function LeadList() {
   ];
 
   const sources = [...new Set(leads.map((l) => l.source))];
+
+  if (loading) {
+    return (
+      <ScreensLayout>
+        <PageLoader text="Loading leads..." />
+      </ScreensLayout>
+    );
+  }
 
   return (
     <ScreensLayout>

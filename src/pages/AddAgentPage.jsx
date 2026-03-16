@@ -2,7 +2,7 @@ import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import Sidebar from "../layouts/Sidebar";
 import { useAgents } from "../context/AgentContext";
-import BackButton from "../components/BackButton";
+import BackButton from "../components/ui/BackButton";
 
 export default function AddAgentPage() {
   const { addAgent } = useAgents();
