@@ -1,5 +1,4 @@
 import { API_BASE_URL } from "../api/config";
-import LeadList from "../pages/LeadListPage";
 
 export const fetchLeads = async () => {
   const res = await fetch(`${API_BASE_URL}/leads`);
