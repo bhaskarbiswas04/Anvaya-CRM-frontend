@@ -37,9 +37,10 @@ export default function DashboardPage() {
           <LeadStats leads={leads} />
 
           {/* Filters + Button */}
-          <div className="d-flex justify-content-between align-items-center mb-3">
+          <div className="d-flex flex-column flex-md-row align-items-md-center justify-content-between gap-3 mb-3">
             <QuickFilters filter={filter} setFilter={setFilter} />
-            <AddLeadButton />
+
+            <AddLeadButton className="align-self-md-start" />
           </div>
 
           {/* Recent Leads */}

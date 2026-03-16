@@ -1,12 +1,12 @@
 export default function QuickFilters({ filter, setFilter }) {
   const getClass = (value) =>
-    `btn me-2 ${filter === value ? "btn-primary" : "btn-outline-primary"}`;
+    `btn ${filter === value ? "btn-primary" : "btn-outline-primary"}`;
 
   const getSuccessClass = (value) =>
-    `btn ms-2 ${filter === value ? "btn-success" : "btn-outline-success"}`;
+    `btn ${filter === value ? "btn-success" : "btn-outline-success"}`;
 
   return (
-    <div className="mb-4">
+    <div className="d-flex flex-wrap gap-2 mb-3">
       <button className={getClass("New")} onClick={() => setFilter("New")}>
         New
       </button>
@@ -33,7 +33,7 @@ export default function QuickFilters({ filter, setFilter }) {
       </button>
 
       <button
-        className={`btn ms-2 ${
+        className={`btn ${
           filter === "" ? "btn-secondary" : "btn-outline-secondary"
         }`}
         onClick={() => setFilter("")}
