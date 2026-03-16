@@ -12,11 +12,37 @@ export default function DashboardPage() {
 
   const [filter, setFilter] = useState("");
 
+  // Skeleton Loading UI
   if (loading) {
     return (
       <ScreensLayout>
-        <div className="p-4">
-          <h3>Loading Leads...</h3>
+        <div className="p-4 bg-light min-vh-100">
+          <div className="mx-auto" style={{ maxWidth: "1200px" }}>
+            <h2 className="text-center my-3">CRM Dashboard</h2>
+
+            {/* Stats Skeleton */}
+            <div className="row g-3 mb-4">
+              {[1, 2, 3, 4, 5].map((i) => (
+                <div key={i} className="col">
+                  <div
+                    className="skeleton"
+                    style={{ height: "100px", borderRadius: "8px" }}
+                  ></div>
+                </div>
+              ))}
+            </div>
+
+            {/* Filters Skeleton */}
+            <div className="d-flex flex-wrap gap-2 mb-3">
+              {[1, 2, 3, 4, 5].map((i) => (
+                <div
+                  key={i}
+                  className="skeleton"
+                  style={{ height: "38px", width: "120px" }}
+                ></div>
+              ))}
+            </div>
+          </div>
         </div>
       </ScreensLayout>
     );

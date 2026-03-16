@@ -14,13 +14,16 @@ export default function LeadDetails() {
   const { id } = useParams();
   const navigate = useNavigate();
 
-  const { addComment, updateLead, getLeadById, getComments, deleteLead } = useLeads();
+  const { addComment, updateLead, getLeadById, getComments, deleteLead } =
+    useLeads();
   const { agents } = useAgents();
 
   const [lead, setLead] = useState(null);
   const [loading, setLoading] = useState(true);
 
   const [open, setOpen] = useState(false);
+  const [showDeleteModal, setShowDeleteModal] = useState(false);
+
   const [comment, setComment] = useState("");
   const [author, setAuthor] = useState("");
 
@@ -68,7 +71,7 @@ export default function LeadDetails() {
     );
   }
 
-  // --function : onClick of Comment submit.
+  // Add comment
   const submit = async () => {
     if (!comment.trim() || !author) return;
 
@@ -88,14 +91,8 @@ export default function LeadDetails() {
     setAuthor("");
   };
 
-  // handle deletion of Lead.
-  const handleDelete = async () => {
-    const confirmDelete = window.confirm(
-      "Are you sure you want to delete this lead?",
-    );
-
-    if (!confirmDelete) return;
-
+  // Confirm delete
+  const confirmDelete = async () => {
     const success = await deleteLead(leadId);
 
     if (success) {
@@ -123,7 +120,10 @@ export default function LeadDetails() {
                 Edit
               </button>
 
-              <button className="btn btn-outline-danger" onClick={handleDelete}>
+              <button
+                className="btn btn-outline-danger"
+                onClick={() => setShowDeleteModal(true)}
+              >
                 Delete
               </button>
             </div>
@@ -253,6 +253,35 @@ export default function LeadDetails() {
               }}
               close={() => setOpen(false)}
             />
+          )}
+
+          {/* Delete Confirmation Modal */}
+          {showDeleteModal && (
+            <div
+              className="modal fade show d-block"
+              style={{ background: "#00000080" }}
+            >
+              <div className="modal-dialog modal-dialog-centered">
+                <div className="modal-content p-4">
+                  <h5 className="text-danger mb-3">Delete Lead</h5>
+
+                  <p>Are you sure you want to delete this lead?</p>
+
+                  <div className="d-flex justify-content-end gap-2">
+                    <button
+                      className="btn btn-secondary"
+                      onClick={() => setShowDeleteModal(false)}
+                    >
+                      Cancel
+                    </button>
+
+                    <button className="btn btn-danger" onClick={confirmDelete}>
+                      Delete
+                    </button>
+                  </div>
+                </div>
+              </div>
+            </div>
           )}
         </div>
       </main>

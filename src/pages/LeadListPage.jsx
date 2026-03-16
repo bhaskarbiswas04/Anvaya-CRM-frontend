@@ -182,20 +182,28 @@ export default function LeadList() {
               </thead>
 
               <tbody>
-                {filtered.map((lead) => (
-                  <tr
-                    key={lead.id || lead._id}
-                    style={{ cursor: "pointer" }}
-                    onClick={() => navigate(`/leads/${lead.id || lead._id}`)}
-                  >
-                    <td>{lead.name}</td>
-                    <td>{lead.status}</td>
-                    <td>{lead.salesAgent?.name}</td>
-                    <td>{lead.source}</td>
-                    <td>{lead.priority}</td>
-                    <td>{lead.timeToClose} days</td>
+                {filtered.length === 0 ? (
+                  <tr>
+                    <td colSpan="6" className="text-center py-4 text-muted">
+                      No leads found. Try adjusting filters or search.
+                    </td>
                   </tr>
-                ))}
+                ) : (
+                  filtered.map((lead) => (
+                    <tr
+                      key={lead.id || lead._id}
+                      style={{ cursor: "pointer" }}
+                      onClick={() => navigate(`/leads/${lead.id || lead._id}`)}
+                    >
+                      <td>{lead.name}</td>
+                      <td>{lead.status}</td>
+                      <td>{lead.salesAgent?.name}</td>
+                      <td>{lead.source}</td>
+                      <td>{lead.priority}</td>
+                      <td>{lead.timeToClose} days</td>
+                    </tr>
+                  ))
+                )}
               </tbody>
             </table>
           </div>
