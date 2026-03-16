@@ -43,20 +43,16 @@
 
 
 .sidebar-link {
-  color: white !important;
-  border-radius: 6px;
-  transition: all 0.25s ease;
+  color: #adb5bd;
 }
 
-/* Hover effect */
 .sidebar-link:hover {
-  background: #02111f;
-  padding-left: 15px;
+  color: #fff;
 }
 
-/* Active link */
 .sidebar-link.active {
-  background: #0d6efd;
+  color: #fff;
+  font-weight: 500;
 }
 
 /* Fixed Table CSS  */

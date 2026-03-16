@@ -1,5 +1,5 @@
 import { useLeads } from "../context/LeadContext";
-import Sidebar from "../layouts/Sidebar";
+import ScreensLayout from "../layouts/ScreensLayout";
 
 import {
   Chart as ChartJS,
@@ -92,10 +92,8 @@ export default function ReportsPage() {
   };
 
   return (
-    <div className="d-flex vh-100">
-      <Sidebar />
-
-      <main className="flex-grow-1 p-4 bg-light container-fluid">
+    <ScreensLayout>
+      <div className="p-4 bg-light min-vh-100">
         <h3 className="mb-4 text-center">Anvaya CRM Reports</h3>
 
         <div className="row g-4 justify-content-center">
@@ -103,32 +101,27 @@ export default function ReportsPage() {
           <div className="col-lg-4 col-md-6 col-12">
             <div className="card p-3 shadow-sm h-100">
               <h6 className="text-center">Leads Closed vs Pipeline</h6>
-
               <Pie data={pipelineData} />
             </div>
           </div>
 
           {/* Leads by Agent */}
-
           <div className="col-lg-4 col-md-6 col-12">
             <div className="card p-3 shadow-sm h-100">
               <h6 className="text-center">Leads Closed by Sales Agent</h6>
-
               <Bar data={agentData} />
             </div>
           </div>
 
           {/* Status Distribution */}
-
           <div className="col-lg-4 col-md-12 col-12">
             <div className="card p-3 shadow-sm h-100">
               <h6 className="text-center">Lead Status Distribution</h6>
-
               <Pie data={statusData} />
             </div>
           </div>
         </div>
-      </main>
-    </div>
+      </div>
+    </ScreensLayout>
   );
 }

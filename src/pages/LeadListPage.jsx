@@ -2,7 +2,7 @@ import { useNavigate, useSearchParams } from "react-router-dom";
 import { useState, useEffect } from "react";
 import { useLeads } from "../context/LeadContext";
 
-import Sidebar from "../layouts/Sidebar";
+import ScreensLayout from "../layouts/ScreensLayout";
 import AddLeadButton from "../components/dashboard-screen/AddLeadButton";
 
 export default function LeadList() {
@@ -59,11 +59,8 @@ export default function LeadList() {
   const sources = [...new Set(leads.map((l) => l.source))];
 
   return (
-    <div className="d-flex vh-100">
-      <Sidebar />
-
-      {/* Make main column flex */}
-      <main className="flex-grow-1 d-flex flex-column p-4 bg-light container-fluid">
+    <ScreensLayout>
+      <div className="p-4 bg-light min-vh-100">
         <h3 className="mb-4 text-center">Lead List</h3>
 
         {/* FILTER BAR */}
@@ -142,43 +139,41 @@ export default function LeadList() {
           </div>
         </div>
 
-        {/* SCROLLABLE TABLE AREA */}
-        <div className="flex-grow-1 overflow-auto">
-          <div className="card shadow-sm h-100">
-            <div className="table-responsive h-100">
-              <table className="table table-hover mb-0">
-                <thead className="table-light sticky-top">
-                  <tr>
-                    <th>Lead</th>
-                    <th>Status</th>
-                    <th>Sales Agent</th>
-                    <th>Source</th>
-                    <th>Priority</th>
-                    <th>Time to Close</th>
-                  </tr>
-                </thead>
+        {/* TABLE */}
+        <div className="card shadow-sm">
+          <div className="table-responsive">
+            <table className="table table-hover mb-0">
+              <thead className="table-light">
+                <tr>
+                  <th>Lead</th>
+                  <th>Status</th>
+                  <th>Sales Agent</th>
+                  <th>Source</th>
+                  <th>Priority</th>
+                  <th>Time to Close</th>
+                </tr>
+              </thead>
 
-                <tbody>
-                  {filtered.map((lead) => (
-                    <tr
-                      key={lead.id || lead._id}
-                      style={{ cursor: "pointer" }}
-                      onClick={() => navigate(`/leads/${lead.id || lead._id}`)}
-                    >
-                      <td>{lead.name}</td>
-                      <td>{lead.status}</td>
-                      <td>{lead.salesAgent?.name}</td>
-                      <td>{lead.source}</td>
-                      <td>{lead.priority}</td>
-                      <td>{lead.timeToClose} days</td>
-                    </tr>
-                  ))}
-                </tbody>
-              </table>
-            </div>
+              <tbody>
+                {filtered.map((lead) => (
+                  <tr
+                    key={lead.id || lead._id}
+                    style={{ cursor: "pointer" }}
+                    onClick={() => navigate(`/leads/${lead.id || lead._id}`)}
+                  >
+                    <td>{lead.name}</td>
+                    <td>{lead.status}</td>
+                    <td>{lead.salesAgent?.name}</td>
+                    <td>{lead.source}</td>
+                    <td>{lead.priority}</td>
+                    <td>{lead.timeToClose} days</td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
           </div>
         </div>
-      </main>
-    </div>
+      </div>
+    </ScreensLayout>
   );
 }

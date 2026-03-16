@@ -1,25 +1,12 @@
-import { useState } from "react";
-import Sidebar from "../layouts/Sidebar";
+import ScreensLayout from "../layouts/ScreensLayout";
 
 import LeadStatusView from "../components/sales-screen/LeadStatusView";
 import SalesAgentView from "../components/sales-screen/SalesAgentView";
 
 export default function SalesPage() {
-  const [sidebarOpen, setSidebarOpen] = useState(false);
-
   return (
-    <div className="d-flex vh-100">
-      <Sidebar isOpen={sidebarOpen} toggle={() => setSidebarOpen(false)} />
-
-      <main className="flex-grow-1 p-4 bg-light container-fluid">
-        {/* Mobile Toggle */}
-        <button
-          className="btn btn-dark d-md-none mb-3"
-          onClick={() => setSidebarOpen(true)}
-        >
-          ☰
-        </button>
-
+    <ScreensLayout>
+      <div className="p-4 bg-light min-vh-100">
         <h2 className="mb-4 text-center">Sales Overview</h2>
 
         <div className="row g-4">
@@ -31,7 +18,7 @@ export default function SalesPage() {
             <SalesAgentView />
           </div>
         </div>
-      </main>
-    </div>
+      </div>
+    </ScreensLayout>
   );
 }

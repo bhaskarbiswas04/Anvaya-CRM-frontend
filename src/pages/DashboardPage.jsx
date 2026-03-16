@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { useLeads } from "../context/LeadContext";
 
-import Sidebar from "../layouts/Sidebar";
+import ScreensLayout from "../layouts/ScreensLayout";
 import LeadPreview from "../components/dashboard-screen/LeadPreview";
 import LeadStats from "../components/dashboard-screen/LeadStats";
 import QuickFilters from "../components/dashboard-screen/QuickFilters";
@@ -14,15 +14,11 @@ export default function DashboardPage() {
 
   if (loading) {
     return (
-      <div className="d-flex vh-100">
-        <Sidebar />
-
-        <main className="flex-grow-1 p-4 bg-light">
-          <div className="mx-auto" style={{ maxWidth: "1200px" }}>
-            <h3>Loading Leads...</h3>
-          </div>
-        </main>
-      </div>
+      <ScreensLayout>
+        <div className="p-4">
+          <h3>Loading Leads...</h3>
+        </div>
+      </ScreensLayout>
     );
   }
 
@@ -31,10 +27,8 @@ export default function DashboardPage() {
     : leads;
 
   return (
-    <div className="d-flex vh-100">
-      <Sidebar />
-
-      <main className="flex-grow-1 p-4 bg-light">
+    <ScreensLayout>
+      <div className="p-4 bg-light min-vh-100">
         {/* Fixed width container */}
         <div className="mx-auto" style={{ maxWidth: "1200px" }}>
           <h2 className="text-center my-3">CRM Dashboard</h2>
@@ -51,7 +45,7 @@ export default function DashboardPage() {
           {/* Recent Leads */}
           <LeadPreview leads={filteredLeads} filter={filter} />
         </div>
-      </main>
-    </div>
+      </div>
+    </ScreensLayout>
   );
 }
