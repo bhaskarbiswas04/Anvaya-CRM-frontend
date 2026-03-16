@@ -85,17 +85,6 @@ export default function LeadList() {
       <div className="p-4 bg-light min-vh-100">
         <h3 className="mb-4 text-center">Lead List</h3>
 
-        {/* SEARCH */}
-        <div className="mb-3">
-          <input
-            type="text"
-            className="form-control"
-            placeholder="Search leads by name, agent, or source..."
-            value={search}
-            onChange={(e) => setSearch(e.target.value)}
-          />
-        </div>
-
         {/* FILTER BAR */}
         <div className="row g-2 mb-3">
           <div className="col-12 col-md">
@@ -170,6 +159,17 @@ export default function LeadList() {
               Clear
             </button>
           </div>
+        </div>
+
+        {/* SEARCH */}
+        <div className="mb-3">
+          <input
+            type="text"
+            className="form-control"
+            placeholder="Search leads by name, agent, or source..."
+            value={search}
+            onChange={(e) => setSearch(e.target.value)}
+          />
         </div>
 
         {/* TABLE */}

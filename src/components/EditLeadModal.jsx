@@ -1,7 +1,10 @@
 import { useState, useEffect } from "react";
 import { fetchTags, createTag } from "../services/tagService";
+import { useAgents } from "../context/AgentContext";
 
 export default function EditLeadModal({ lead, updateLead, close }) {
+  const { agents } = useAgents();
+
   const [form, setForm] = useState({
     name: "",
     source: "",
@@ -34,7 +37,7 @@ export default function EditLeadModal({ lead, updateLead, close }) {
         status: lead.status,
         priority: lead.priority,
         timeToClose: lead.timeToClose,
-        salesAgent: lead.salesAgent?.id || lead.salesAgent?._id,
+        salesAgent: lead.salesAgent?.id || lead.salesAgent?._id || "",
         tags: lead.tags || [],
       });
     }
@@ -84,41 +87,109 @@ export default function EditLeadModal({ lead, updateLead, close }) {
       className="modal fade show d-block"
       style={{ background: "#00000080" }}
     >
-      <div className="modal-dialog">
+      <div className="modal-dialog modal-dialog-centered modal-lg">
         <div className="modal-content p-4">
           <h4 className="mb-3">Edit Lead</h4>
 
-          {/* Lead Name */}
-          <div className="mb-3">
-            <label className="form-label fw-semibold">Lead Name</label>
-            <input
-              className="form-control"
-              name="name"
-              value={form.name}
-              onChange={handleChange}
-            />
+          <div className="row g-3">
+            {/* Lead Name */}
+            <div className="col-md-12">
+              <label className="form-label fw-semibold">Lead Name</label>
+              <input
+                className="form-control"
+                name="name"
+                value={form.name}
+                onChange={handleChange}
+              />
+            </div>
+
+            {/* Sales Agent */}
+            <div className="col-md-6">
+              <label className="form-label fw-semibold">Sales Agent</label>
+              <select
+                className="form-select"
+                name="salesAgent"
+                value={form.salesAgent}
+                onChange={handleChange}
+              >
+                <option value="">Select Agent</option>
+
+                {agents.map((agent) => (
+                  <option
+                    key={agent.id || agent._id}
+                    value={agent.id || agent._id}
+                  >
+                    {agent.name}
+                  </option>
+                ))}
+              </select>
+            </div>
+
+            {/* Status */}
+            <div className="col-md-6">
+              <label className="form-label fw-semibold">Status</label>
+              <select
+                className="form-select"
+                name="status"
+                value={form.status}
+                onChange={handleChange}
+              >
+                <option value="New">New</option>
+                <option value="Contacted">Contacted</option>
+                <option value="Qualified">Qualified</option>
+                <option value="Proposal Sent">Proposal Sent</option>
+                <option value="Closed">Closed</option>
+              </select>
+            </div>
+
+            {/* Lead Source */}
+            <div className="col-md-6">
+              <label className="form-label fw-semibold">Lead Source</label>
+              <select
+                className="form-select"
+                name="source"
+                value={form.source}
+                onChange={handleChange}
+              >
+                <option value="Website">Website</option>
+                <option value="Referral">Referral</option>
+                <option value="Cold Call">Cold Call</option>
+                <option value="Advertisement">Advertisement</option>
+                <option value="Email">Email</option>
+                <option value="Other">Other</option>
+              </select>
+            </div>
+
+            {/* Priority */}
+            <div className="col-md-6">
+              <label className="form-label fw-semibold">Priority</label>
+              <select
+                className="form-select"
+                name="priority"
+                value={form.priority}
+                onChange={handleChange}
+              >
+                <option value="High">High</option>
+                <option value="Medium">Medium</option>
+                <option value="Low">Low</option>
+              </select>
+            </div>
+
+            {/* Time to Close */}
+            <div className="col-md-6">
+              <label className="form-label fw-semibold">Time to Close</label>
+              <input
+                type="number"
+                className="form-control"
+                name="timeToClose"
+                value={form.timeToClose}
+                onChange={handleChange}
+              />
+            </div>
           </div>
 
-          {/* Source */}
-          <div className="mb-3">
-            <label className="form-label fw-semibold">Lead Source</label>
-            <select
-              className="form-select"
-              name="source"
-              value={form.source}
-              onChange={handleChange}
-            >
-              <option value="Website">Website</option>
-              <option value="Referral">Referral</option>
-              <option value="Cold Call">Cold Call</option>
-              <option value="Advertisement">Advertisement</option>
-              <option value="Email">Email</option>
-              <option value="Other">Other</option>
-            </select>
-          </div>
-
-          {/* TAGS */}
-          <div className="mb-3">
+          {/* TAG SYSTEM (Your original code preserved) */}
+          <div className="mt-3">
             <label className="form-label fw-semibold">Tags</label>
 
             <div className="d-flex gap-2 mb-2">
@@ -206,10 +277,11 @@ export default function EditLeadModal({ lead, updateLead, close }) {
           </div>
 
           {/* Buttons */}
-          <div className="d-flex justify-content-center gap-2">
+          <div className="d-flex justify-content-center gap-2 mt-4">
             <button className="btn btn-secondary" onClick={close}>
               Cancel
             </button>
+
             <button className="btn btn-primary" onClick={save}>
               Save Changes
             </button>
