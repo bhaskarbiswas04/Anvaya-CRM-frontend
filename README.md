@@ -180,6 +180,3 @@ npm install
 
 * GitHub: https://github.com/bhaskarbiswas04
 * LinkedIn: https://www.linkedin.com/in/bhaskarb04/
-* Dashboard and analytics implementation
-
-Perfect for showcasing **job-ready skills for MERN stack roles** 🚀
