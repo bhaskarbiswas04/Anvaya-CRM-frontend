@@ -146,30 +146,9 @@ Built with a **scalable architecture and production-ready UI/UX patterns**.
 ### 1️⃣ Clone the repository
 
 ```bash
-git clone [https://github.com/your-username/anvaya-crm.git](https://github.com/bhaskarbiswas04/Anvaya-CRM-frontend.git)
+git clone https://github.com/bhaskarbiswas04/Anvaya-CRM-frontend.git
 cd anvaya-crm
-```
-
----
-
-### 2️⃣ Setup Backend
-
-```bash
-cd backend
 npm install
-```
-
-Create `.env` file:
-
-```
-MONGO_URI=your_mongodb_connection_string
-PORT=5000
-```
-
-Run backend:
-
-```bash
-npm run dev
 ```
 
 ---
@@ -180,47 +159,7 @@ npm run dev
 cd frontend
 npm install
 ```
-
-Create `.env`:
-
-```
-VITE_API_BASE_URL=http://localhost:5000
-```
-
-Run frontend:
-
-```bash
-npm run dev
-```
-
 ---
-
-## 🌐 Deployment
-
-### Frontend (Vercel)
-
-Add `vercel.json`:
-
-```json
-{
-  "rewrites": [
-    { "source": "/(.*)", "destination": "/" }
-  ]
-}
-```
-
----
-
-### Backend (Vercel)
-
-* Deploy API routes
-* Set environment variables in Vercel dashboard
-
----
-
-## 📸 Screenshots
-
-> Add screenshots here after deployment
 
 ### Dashboard
 
@@ -269,20 +208,6 @@ Add `vercel.json`:
 * LinkedIn: https://linkedin.com/in/your-profile
 
 ---
-
-## ⭐ Show Your Support
-
-If you like this project:
-
-* ⭐ Star this repo
-* 🍴 Fork it
-* 📢 Share it
-
----
-
-## 📌 Final Note
-
-This project demonstrates:
 
 * Full-stack MERN development
 * API design and integration
