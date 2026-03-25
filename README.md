@@ -180,13 +180,6 @@ npm install
 
 * GitHub: https://github.com/bhaskarbiswas04
 * LinkedIn: https://www.linkedin.com/in/bhaskarb04/
-
----
-
-* Full-stack MERN development
-* API design and integration
-* State management
-* UI/UX best practices
 * Dashboard and analytics implementation
 
 Perfect for showcasing **job-ready skills for MERN stack roles** 🚀
