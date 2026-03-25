@@ -143,7 +143,7 @@ Built with a **scalable architecture and production-ready UI/UX patterns**.
 
 ## ⚙️ Setup Instructions
 
-### 1️⃣ Clone the repository
+### Clone the repository
 
 ```bash
 git clone https://github.com/bhaskarbiswas04/Anvaya-CRM-frontend.git
@@ -153,7 +153,7 @@ npm install
 
 ---
 
-### 3️⃣ Setup Frontend
+### Setup Frontend
 
 ```bash
 cd frontend
@@ -163,22 +163,6 @@ npm install
 
 ### Dashboard
 
-![Dashboard](./screenshots/dashboard.png)
-
-### Leads Page
-
-![Leads](./screenshots/leads.png)
-
-### Lead Details
-
-![Lead Details](./screenshots/lead-details.png)
-
-### Reports
-
-![Reports](./screenshots/reports.png)
-
----
-
 ## 🚀 Key Highlights
 
 * Clean and scalable architecture
@@ -187,16 +171,6 @@ npm install
 * Fully responsive design
 * API-driven data handling
 * Context-based state management
-
----
-
-## 📈 Future Improvements
-
-* Kanban board (drag & drop leads)
-* Role-based authentication
-* Real-time updates (Socket.io)
-* Export reports (CSV/PDF)
-* Dark mode
 
 ---
 
