@@ -161,8 +161,6 @@ npm install
 ```
 ---
 
-### Dashboard
-
 ## Key Highlights
 
 * Clean and scalable architecture
