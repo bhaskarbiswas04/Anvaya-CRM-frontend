@@ -4,7 +4,7 @@ A modern **MERN Stack Customer Relationship Management (CRM)** system designed t
 
 ---
 
-## 📌 Project Overview
+## Project Overview
 
 Anvaya CRM helps sales teams efficiently:
 
@@ -18,7 +18,7 @@ Built with a **scalable architecture and production-ready UI/UX patterns**.
 
 ---
 
-## 🛠️ Tech Stack
+## Tech Stack
 
 ### Frontend
 
@@ -45,51 +45,51 @@ Built with a **scalable architecture and production-ready UI/UX patterns**.
 
 ---
 
-## ✨ Features
+## Features
 
-### 🧩 Lead Management
+### Lead Management
 
 * Create, update, delete leads
 * View lead details
 * Track lead status
 * Assign sales agents
 
-### 🧑‍💼 Agent Management
+### Agent Management
 
 * Add and manage sales agents
 * Assign agents to leads
 
-### 🏷️ Tag System
+### Tag System
 
 * Create custom tags
 * Attach/remove tags from leads
 * View all available tags
 
-### 💬 Comments System
+### Comments System
 
 * Add comments to leads
 * Agent-based comments
 * Timestamp tracking
 
-### 📊 Dashboard
+### Dashboard
 
 * Lead statistics
 * Quick filters
 * Recent leads preview
 
-### 📈 Sales Insights
+### Sales Insights
 
 * Leads grouped by status
 * Leads grouped by agents
 * Filtering support
 
-### 📉 Reports
+### Reports
 
 * Leads Closed vs Pipeline (Pie Chart)
 * Closed Leads by Agent (Bar Chart)
 * Lead Status Distribution (Pie Chart)
 
-### 🔍 Search & Filters
+### Search & Filters
 
 * Search leads by name, agent, source
 * Filter by:
@@ -102,7 +102,7 @@ Built with a **scalable architecture and production-ready UI/UX patterns**.
   * Priority
   * Time to close
 
-### 🎨 UI/UX Features
+### UI/UX Features
 
 * Responsive design (mobile + desktop)
 * Sidebar navigation
@@ -114,7 +114,7 @@ Built with a **scalable architecture and production-ready UI/UX patterns**.
 
 ---
 
-## 🔌 API Endpoints
+## API Endpoints
 
 ### Leads
 
