@@ -141,7 +141,7 @@ Built with a **scalable architecture and production-ready UI/UX patterns**.
 
 ---
 
-## ⚙️ Setup Instructions
+## Setup Instructions
 
 ### Clone the repository
 
