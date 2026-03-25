@@ -114,45 +114,6 @@ Built with a **scalable architecture and production-ready UI/UX patterns**.
 
 ---
 
-## 📂 Project Structure
-
-```
-src/
-│
-├── components/
-│   ├── dashboard-screen/
-│   ├── sales-screen/
-│   ├── ui/
-│
-├── pages/
-│   ├── DashboardPage.jsx
-│   ├── LeadListPage.jsx
-│   ├── LeadDetails.jsx
-│   ├── SalesPage.jsx
-│   ├── SalesAgentPage.jsx
-│   ├── ReportsPage.jsx
-│
-├── layouts/
-│   ├── ScreensLayout.jsx
-│   ├── Sidebar.jsx
-│
-├── context/
-│   ├── LeadContext.jsx
-│   ├── AgentContext.jsx
-│
-├── services/
-│   ├── leadService.js
-│   ├── agentService.js
-│   ├── tagService.js
-│
-├── utils/
-│   ├── badges.js
-│
-└── App.jsx
-```
-
----
-
 ## 🔌 API Endpoints
 
 ### Leads
@@ -160,7 +121,7 @@ src/
 * `GET /leads`
 * `GET /leads/:id`
 * `POST /leads`
-* `PUT /leads/:id`
+* `POST /leads/:id`
 * `DELETE /leads/:id`
 
 ### Comments
@@ -185,7 +146,7 @@ src/
 ### 1️⃣ Clone the repository
 
 ```bash
-git clone https://github.com/your-username/anvaya-crm.git
+git clone [https://github.com/your-username/anvaya-crm.git](https://github.com/bhaskarbiswas04/Anvaya-CRM-frontend.git)
 cd anvaya-crm
 ```
 
