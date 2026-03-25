@@ -178,8 +178,8 @@ npm install
 
 **Bhaskar Biswas**
 
-* GitHub: https://github.com/your-username
-* LinkedIn: https://linkedin.com/in/your-profile
+* GitHub: https://github.com/bhaskarbiswas04
+* LinkedIn: https://www.linkedin.com/in/bhaskarb04/
 
 ---
 
