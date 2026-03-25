@@ -163,7 +163,7 @@ npm install
 
 ### Dashboard
 
-## 🚀 Key Highlights
+## Key Highlights
 
 * Clean and scalable architecture
 * Real-world CRM features
@@ -174,7 +174,7 @@ npm install
 
 ---
 
-## 👨‍💻 Author
+## Author
 
 **Bhaskar Biswas**
 
