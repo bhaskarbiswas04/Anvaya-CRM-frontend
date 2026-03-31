@@ -12,15 +12,6 @@ A modern **MERN Stack Customer Relationship Management (CRM)** system to manage 
 
 ---
 
-### 📌 Demo Highlights
-
-* Explore dashboard analytics
-* Create and manage leads
-* Assign agents and update statuses
-* Add tags and comments
-* View reports and charts
-
-
 ## 📍 Project Overview
 
 Anvaya CRM helps sales teams:
