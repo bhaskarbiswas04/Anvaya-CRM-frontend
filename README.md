@@ -1,28 +1,23 @@
-# 🚀 Anvaya CRM
+# Anvaya CRM
 
-A modern **MERN Stack Customer Relationship Management (CRM)** system designed to manage leads, track sales pipelines, and analyze performance with a clean and responsive UI.
-
----
-
-## [Live Demo](https://anvaya-crm-frontend-swart.vercel.app/)
+A modern **MERN Stack Customer Relationship Management (CRM)** system to manage leads, track sales pipelines, and analyze performance with a clean, responsive UI.
 
 ---
 
-## Project Overview
+## 📍 Project Overview
 
-Anvaya CRM helps sales teams efficiently:
+Anvaya CRM helps sales teams:
 
-* Manage leads lifecycle
-* Assign sales agents
-* Track lead status
-* Add comments and tags
-* Analyze performance using dashboards and reports
+* Manage the complete lead lifecycle
+* Assign and track sales agents
+* Monitor pipeline performance
+* Analyze data through dashboards and reports
 
 Built with a **scalable architecture and production-ready UI/UX patterns**.
 
 ---
 
-## Tech Stack
+## 📍 Tech Stack
 
 ### Frontend
 
@@ -30,7 +25,7 @@ Built with a **scalable architecture and production-ready UI/UX patterns**.
 * React Router
 * Bootstrap 5
 * Chart.js (React ChartJS 2)
-* Context API (State Management)
+* Context API
 
 ### Backend
 
@@ -49,136 +44,279 @@ Built with a **scalable architecture and production-ready UI/UX patterns**.
 
 ---
 
-## Features
+## 📍 Environment Setup
+
+### Backend `.env`
+
+```env
+MONGODB=mongodb+srv://04bhaskarbiswas_db_user:A2fyfwqm9nRdgN3W@anvaya-crm-backend.prnyci3.mongodb.net/?appName=anvaya-crm-backend
+PORT=5000
+```
+
+---
+
+### Frontend `.env`
+
+```env
+VITE_API_URL=https://anvaya-crm-backend-ten.vercel.app
+```
+
+---
+
+## 📍 Features
 
 ### Lead Management
 
-* Create, update, delete leads
-* View lead details
-* Track lead status
-* Assign sales agents
+* Creates, updates, and deletes leads
+* Displays detailed lead information
+* Tracks lead status across pipeline stages
+* Assigns sales agents to leads
+
+---
 
 ### Agent Management
 
-* Add and manage sales agents
-* Assign agents to leads
+* Creates and manages sales agents
+* Assigns agents to leads
 
-### Tag System
+---
 
-* Create custom tags
-* Attach/remove tags from leads
-* View all available tags
+### Tag Management
+
+* Creates custom tags
+* Attaches and removes tags from leads
+* Displays all available tags
+
+---
 
 ### Comments System
 
-* Add comments to leads
-* Agent-based comments
-* Timestamp tracking
+* Adds comments to leads
+* Associates comments with agents
+* Displays timestamped comment history
+
+---
 
 ### Dashboard
 
-* Lead statistics
-* Quick filters
-* Recent leads preview
+* Displays lead statistics
+* Filters leads using quick filters
+* Shows recent leads preview
+
+---
 
 ### Sales Insights
 
-* Leads grouped by status
-* Leads grouped by agents
-* Filtering support
+* Groups leads by status
+* Groups leads by sales agents
+* Filters insights dynamically
+
+---
 
 ### Reports
 
-* Leads Closed vs Pipeline (Pie Chart)
-* Closed Leads by Agent (Bar Chart)
-* Lead Status Distribution (Pie Chart)
+* Visualizes closed vs pipeline leads
+* Displays closed leads by agent
+* Shows lead status distribution
+
+---
 
 ### Search & Filters
 
-* Search leads by name, agent, source
-* Filter by:
-
-  * Status
-  * Agent
-  * Source
-* Sort by:
-
-  * Priority
-  * Time to close
-
-### UI/UX Features
-
-* Responsive design (mobile + desktop)
-* Sidebar navigation
-* Confirmation modals
-* Empty states
-* Loading skeletons (dashboard)
-* Progress loaders (other pages)
-* Scrollable tables
+* Searches leads by name, agent, or source
+* Filters leads by status, agent, and source
+* Sorts leads by priority and time to close
 
 ---
 
-## API Endpoints
+### UI/UX Enhancements
 
-### Leads
+* Implements responsive design
+* Displays sidebar navigation
+* Shows confirmation modals
+* Handles empty states
+* Displays loading skeletons and loaders
+* Enables scrollable tables
 
-* `GET /leads`
-* `GET /leads/:id`
-* `POST /leads`
-* `POST /leads/:id`
-* `DELETE /leads/:id`
+---
+
+## 📍 API Documentation
+
+###  Leads
+
+#### GET /leads
+
+Retrieves all leads or filtered leads based on query parameters.
+
+**Sample Response:**
+
+```json
+[
+  {
+    "_id": "lead_id",
+    "name": "Company ABC",
+    "status": "Qualified",
+    "priority": "High",
+    "source": "Website"
+  }
+]
+```
+
+---
+
+#### GET /leads/:id
+
+Retrieves a single lead by ID.
+
+**Sample Response:**
+
+```json
+{
+  "_id": "lead_id",
+  "name": "Company ABC",
+  "status": "Qualified",
+  "priority": "High"
+}
+```
+
+---
+
+#### POST /leads
+
+Creates a new lead.
+
+**Sample Request:**
+
+```json
+{
+  "name": "Company ABC",
+  "status": "New",
+  "priority": "High"
+}
+```
+
+---
+
+#### PUT /leads/:id
+
+Updates an existing lead.
+
+---
+
+#### DELETE /leads/:id
+
+Deletes a lead.
+
+---
 
 ### Comments
 
-* `GET /leads/:id/comments`
-* `POST /leads/:id/comments`
+#### GET /leads/:id/comments
+
+Retrieves all comments for a lead.
+
+**Sample Response:**
+
+```json
+[
+  {
+    "commentText": "Follow up tomorrow",
+    "author": "agent_id",
+    "createdAt": "2025-01-01"
+  }
+]
+```
+
+---
+
+#### POST /leads/:id/comments
+
+Adds a new comment to a lead.
+
+---
 
 ### Agents
 
-* `GET /agents`
-* `POST /agents`
+#### GET /agents
+
+Retrieves all sales agents.
+
+**Sample Response:**
+
+```json
+[
+  {
+    "_id": "agent_id",
+    "name": "John Doe",
+    "email": "john@example.com"
+  }
+]
+```
+
+---
+
+#### POST /agents
+
+Creates a new sales agent.
+
+---
 
 ### Tags
 
-* `GET /tags`
-* `POST /tags`
+#### GET /tags
 
----
+Retrieves all available tags.
 
-## Setup Instructions
+**Sample Response:**
 
-### Clone the repository
-
-```bash
-git clone https://github.com/bhaskarbiswas04/Anvaya-CRM-frontend.git
-cd anvaya-crm
-npm install
+```json
+[
+  {
+    "_id": "tag_id",
+    "name": "Hot Lead"
+  }
+]
 ```
 
 ---
 
-### Setup Frontend
+#### POST /tags
 
-```bash
-cd frontend
-npm install
-```
+Creates a new tag.
+
 ---
 
-## Key Highlights
+## Deployment
 
-* Clean and scalable architecture
+### Frontend (Vercel)
+
+```json
+{
+  "rewrites": [
+    { "source": "/(.*)", "destination": "/" }
+  ]
+}
+```
+
+---
+
+## 📍 Screenshots
+
+*Add your screenshots here*
+
+---
+
+## 📍 Key Highlights
+
+* Scalable architecture
 * Real-world CRM features
-* Production-ready UI/UX
-* Fully responsive design
-* API-driven data handling
-* Context-based state management
+* API-driven design
+* Responsive UI
+* Data visualization
 
 ---
 
-## Author
+## 📍 Author
 
 **Bhaskar Biswas**
-
-* GitHub: https://github.com/bhaskarbiswas04
-* LinkedIn: https://www.linkedin.com/in/bhaskarb04/
+---
