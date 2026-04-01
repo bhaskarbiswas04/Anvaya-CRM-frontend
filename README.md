@@ -175,7 +175,6 @@ Retrieves a single lead by ID.
 **Sample Response:**
 
 ```json
-[
   {
     "_id": "lead_id",
     "name": "Company ABC",
@@ -186,7 +185,6 @@ Retrieves a single lead by ID.
     "timeToClose": "15",
     "priority": "High",
   }
-]
 ```
 
 ---
@@ -198,7 +196,6 @@ Creates a new lead.
 **Sample Request:**
 
 ```json
-[
   {
     "_id": "lead_id",
     "name": "Company ABC",
@@ -209,7 +206,6 @@ Creates a new lead.
     "timeToClose": "15",
     "priority": "High",
   }
-]
 ```
 
 ---
@@ -253,13 +249,11 @@ Adds a new comment to a lead.
 **Sample Response:**
 
 ```json
-[
   {
     "commentText": "Follow up tomorrow",
     "author": "agent_id",
     "createdAt": "2025-04-01"
   }
-]
 ```
 
 ---
@@ -291,12 +285,10 @@ Creates a new sales agent.
 **Sample Request:**
 
 ```json
-[
   {
     "name": "Mike Tyson",
     "email": "mike@example.com"
   }
-]
 ```
 
 ---
@@ -346,4 +338,5 @@ Creates a new tag.
 ## 📍 Author
 
 **Bhaskar Biswas**
+For bugs or feature requests, please reach out to 04bhaskarbiswas@gmail.com
 ---
