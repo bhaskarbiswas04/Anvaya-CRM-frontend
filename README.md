@@ -321,9 +321,14 @@ Creates a new tag.
 
 ## 📍 Screenshots
 
-*Add your screenshots here*
+<img width="1897" height="863" alt="Anvaya_CRM_HomePage" src="https://github.com/user-attachments/assets/a03be0de-defe-4a4f-927f-f099493ea314" />
+<img width="1892" height="870" alt="Anvaya_CRM_LeadsPage" src="https://github.com/user-attachments/assets/a900aa0c-61f3-4821-8ae4-3e6a75c54897" />
+<img width="1893" height="866" alt="Anvaya_CRM_SalesPage" src="https://github.com/user-attachments/assets/92ccbb46-9bed-498e-be78-daf1d317ff58" />
+<img width="1901" height="862" alt="Anvaya_CRM_AgentsPage" src="https://github.com/user-attachments/assets/b712c8a8-11b4-45dc-915b-ff3ea7521a7f" />
+<img width="1901" height="860" alt="Anvaya_CRM_ReportsPage" src="https://github.com/user-attachments/assets/6a85244c-f8b2-4b16-921d-b2fa7a9ecd3d" />
 
----<img width="1897" height="863" alt="Anvaya_CRM_HomePage" src="https://github.com/user-attachments/assets/a03be0de-defe-4a4f-927f-f099493ea314" />
+---
+
 
 
 ## 📍 Key Highlights
