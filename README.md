@@ -50,7 +50,6 @@ Anvaya CRM helps sales teams:
 ### Backend `.env`
 
 ```env
-MONGODB=mongodb+srv://04bhaskarbiswas_db_user:A2fyfwqm9nRdgN3W@anvaya-crm-backend.prnyci3.mongodb.net/?appName=anvaya-crm-backend
 PORT=5000
 ```
 
