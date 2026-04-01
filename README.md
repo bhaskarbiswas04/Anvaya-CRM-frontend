@@ -323,7 +323,8 @@ Creates a new tag.
 
 *Add your screenshots here*
 
----
+---<img width="1897" height="863" alt="Anvaya_CRM_HomePage" src="https://github.com/user-attachments/assets/a03be0de-defe-4a4f-927f-f099493ea314" />
+
 
 ## 📍 Key Highlights
 
