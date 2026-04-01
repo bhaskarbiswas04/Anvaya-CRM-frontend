@@ -6,7 +6,7 @@ A modern **MERN Stack Customer Relationship Management (CRM)** system to manage 
 
 ## 🌐 Live Demo
 
-🚀 Experience the application live:
+Experience the application live:
 
 * 🔗 **Live Demo:** [Anvaya CRM](https://anvaya-crm-frontend-swart.vercel.app/)
 
