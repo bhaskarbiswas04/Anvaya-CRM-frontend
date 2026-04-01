@@ -4,9 +4,7 @@ A modern **MERN Stack Customer Relationship Management (CRM)** system to manage 
 
 ---
 
-## 🌐 Live Demo
-
-Experience the application live: [Anvaya CRM](https://anvaya-crm-frontend-swart.vercel.app/)
+## 🌐 Experience the application live: [Anvaya CRM](https://anvaya-crm-frontend-swart.vercel.app/)
 
 ---
 
@@ -18,9 +16,6 @@ Anvaya CRM helps sales teams:
 * Assign and track sales agents
 * Monitor pipeline performance
 * Analyze data through dashboards and reports
-
-Built with a **scalable architecture and production-ready UI/UX patterns**.
-
 ---
 
 ## 📍 Tech Stack
@@ -292,6 +287,17 @@ Retrieves all sales agents.
 #### POST /agents
 
 Creates a new sales agent.
+
+**Sample Request:**
+
+```json
+[
+  {
+    "name": "Mike Tyson",
+    "email": "mike@example.com"
+  }
+]
+```
 
 ---
 
