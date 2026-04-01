@@ -6,9 +6,7 @@ A modern **MERN Stack Customer Relationship Management (CRM)** system to manage 
 
 ## 🌐 Live Demo
 
-Experience the application live:
-
-* 🔗 **Live Demo:** [Anvaya CRM](https://anvaya-crm-frontend-swart.vercel.app/)
+Experience the application live: [Anvaya CRM](https://anvaya-crm-frontend-swart.vercel.app/)
 
 ---
 
@@ -163,9 +161,12 @@ Retrieves all leads or filtered leads based on query parameters.
   {
     "_id": "lead_id",
     "name": "Company ABC",
+    "source": "Referral",
+    "salesAgent": "Mike",
     "status": "Qualified",
+    "tags": "Hot, Follow Up",
+    "timeToClose": "15",
     "priority": "High",
-    "source": "Website"
   }
 ]
 ```
@@ -179,12 +180,18 @@ Retrieves a single lead by ID.
 **Sample Response:**
 
 ```json
-{
-  "_id": "lead_id",
-  "name": "Company ABC",
-  "status": "Qualified",
-  "priority": "High"
-}
+[
+  {
+    "_id": "lead_id",
+    "name": "Company ABC",
+    "source": "Referral",
+    "salesAgent": "Mike",
+    "status": "Qualified",
+    "tags": "Hot, Follow Up",
+    "timeToClose": "15",
+    "priority": "High",
+  }
+]
 ```
 
 ---
@@ -196,11 +203,18 @@ Creates a new lead.
 **Sample Request:**
 
 ```json
-{
-  "name": "Company ABC",
-  "status": "New",
-  "priority": "High"
-}
+[
+  {
+    "_id": "lead_id",
+    "name": "Company ABC",
+    "source": "Referral",
+    "salesAgent": "John",
+    "status": "New",
+    "tags": "Hot, Follow Up",
+    "timeToClose": "15",
+    "priority": "High",
+  }
+]
 ```
 
 ---
@@ -240,6 +254,18 @@ Retrieves all comments for a lead.
 #### POST /leads/:id/comments
 
 Adds a new comment to a lead.
+
+**Sample Response:**
+
+```json
+[
+  {
+    "commentText": "Follow up tomorrow",
+    "author": "agent_id",
+    "createdAt": "2025-04-01"
+  }
+]
+```
 
 ---
 
@@ -292,19 +318,6 @@ Retrieves all available tags.
 
 Creates a new tag.
 
----
-
-## Deployment
-
-### Frontend (Vercel)
-
-```json
-{
-  "rewrites": [
-    { "source": "/(.*)", "destination": "/" }
-  ]
-}
-```
 
 ---
 
